@@ -1,44 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<link rel="apple-touch-icon" type="image/png" href="https://www.oc.edu/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="OC Story Maker">
-<link rel="mask-icon" href="https://www.oc.edu/safari-pinned-tab.svg" color="#801328">
-<title>OC Story Maker</title>
-<link rel="stylesheet" href="https://use.typekit.net/nyp5qmz.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-<style>
-#canvas {
-  background: #801328 url(https://oc.edu/dist/img/oc-logo-symbol.svg) no-repeat 100% 50px;
-  background-size: 100px auto;
-  color: #fff;
-  font-family: sofia-pro, sans-serif;
-  font-weight: 600;
-  font-style: normal;
-  font-size: 35px;
-  line-height: 1.25;
-  -webkit-font-smoothing: antialiased;
-  display: table;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-}
-#type {
-  display: table-cell;
-  vertical-align: middle;
-  padding: 20px;
-}
-#type:empty::before {content: "Load this on your phone, type here, and take a screenshot when you're done.";}
-#type:empty:focus::before {content: "";}
-</style>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" type="image/png" href="https://www.oc.edu/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="OC Story Maker">
+  <link rel="mask-icon" href="https://www.oc.edu/safari-pinned-tab.svg" color="#801328">
+  <title>OC Story Maker</title>
+  <link rel="stylesheet" href="https://use.typekit.net/nyp5qmz.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <style>
+    #canvas {
+      background: #801328 url(https://oc.edu/dist/img/oc-logo-symbol.svg) no-repeat 100% 50px;
+      background-size: 100px auto;
+      color: #fff;
+      font-family: sofia-pro, sans-serif;
+      font-weight: 600;
+      font-style: normal;
+      font-size: 35px;
+      line-height: 1.25;
+      -webkit-font-smoothing: antialiased;
+      display: table;
+      width: 100%;
+      height: 100%;
+      position: fixed;
+    }
+    #type {
+      display: table-cell;
+      vertical-align: middle;
+      padding: 20px;
+    }
+    #type:empty::before {content: "Load this on your phone, type here, and take a screenshot when you're done.";}
+    #type:empty:focus::before {content: "";}
+    #colors {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 100px;
+      z-index: 10;
+      display: flex;
+    }
+    #colors a {
+      width: 50%;
+      height: 100%;
+    }
+    #colors:active,
+    #colors:focus {outline: none;}
+  </style>
 </head>
 
-<body translate="no">
+<body>
+  <div id="colors">
+    <a href="javascript:void(0)" onclick="changeColors('prev')"></a>
+    <a href="javascript:void(0)" onclick="changeColors('next')"></a>
+  </div>
   <div id="canvas">
     <div contenteditable="true" id="type"></div>
   </div>
+
+<script>
+let i = 0;
+function changeColors(dir) {
+  let colors = [
+    '#801328',
+    '#f9c634',
+    '#f68d76',
+    '#f04e3e',
+    '#118acb',
+    '#708e9a',
+    '#004761',
+    //'#bde3dc',
+    '#5ec4b6',
+    '#27575a',
+    '#002e46'
+  ];
+  let canvas = document.getElementById('canvas');
+  let total = colors.length-1;
+
+  console.log(i, colors[i], dir);
+  canvas.style.backgroundColor = colors[i];
+
+  if (dir == 'next') {
+    i < total ? i++ : i=0;
+  } else {
+    i > 0 ? i-- : i=total
+  }
+
+  console.log(i, colors[i], dir);
+  canvas.style.backgroundColor = colors[i];
+
+}
+</script>
+
 </body>
 </html>
