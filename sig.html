@@ -1,0 +1,150 @@
+<style type="text/css">
+* {margin: 0; padding: 0; box-sizing: border-box;}
+body {background: #f4f4f4;}
+form {padding: 0 30px 30px;}
+input {
+  display: block;
+  font-size: 15px;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  max-width: 500px;
+  margin: 0 auto 7px;
+}
+#preview {
+  background: #fff;
+  margin: 0 auto 30px;
+  max-width: 500px;
+  padding: 30px;
+  position: relative;
+}
+#copyBtn {
+  background: rgba(0,0,0,.2);
+  position: absolute;
+  display: block;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  opacity: 0;
+  transition: all .2s;
+}
+#copyBtn:hover,
+#copyBtn:focus {opacity: 1;}
+#copyBtn span {
+  background: #118acb;
+  color: #fff;
+  font-family: sans-serif;
+  font-size: 18px;
+  padding: 10px 20px;
+  border-radius: 3px;
+  display: inline-block;
+  position: relative;
+  top: 55%;
+  transform: translateY(-50%);
+  transition: all .2s ease-out;
+}
+#copyBtn:hover span,
+#copyBtn:focus span {top: 50%;}
+#copyBtn:focus span {background: #2b9c4a;}
+#copyBtn span:after {content: 'Copy to clipboard';}
+#copyBtn:focus span:before {content: '\2713'; margin-right: 5px;}
+#copyBtn:focus span:after {content: 'Copied';}
+.tip {
+  border-top: 1px dashed rgba(0,0,0,.1);
+  font-family: sans-serif;
+  font-size: 13px;
+  color: rgba(0,0,0,.5);
+  text-align: center;
+  padding: 30px 30px 0;
+  margin-bottom: 30px;
+}
+</style>
+
+
+<div class="tip" style="border:none;">1. Enter your information</div>
+
+<form id="form" autocomplete="off">
+  <input class="input" name="name" type="text" placeholder="Name" />
+  <input class="input" name="department" type="text" placeholder="Department" />
+  <input class="input" name="title" type="text" placeholder="Job Title" />
+  <input class="input" name="phone" type="tel" maxlength="12" placeholder="Phone Number" />
+  <input class="input" name="url" type="text" placeholder="Website URL" />
+</form>
+
+
+<div class="tip">2. Copy your signature</div>
+
+<div id="preview">
+
+  <a id="copyBtn" onclick="copy()" href="javascript:void(0)">
+    <span></span>
+  </a>
+
+  <!-- {% spaceless %} -->
+  <div id="signature">
+    <table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; color: #801328;">
+      <tbody>
+        <tr>
+          <td width="140px;" valign="middle" style="border-collapse:collapse; border-right: 1px solid #801328; width:140px; vertical-align:middle;">
+            <img src="https://oc.edu/uploads/images/email/oc-logo-email.png" alt="Oklahoma Christian University" width="120" height="78px" style="width:120px; height:78px;" />
+          </td>
+          <td style="border-collapse:collapse; font-size: 13px; line-height: 1.5; font-family: arial, sans-serif; font-weight: normal; padding-left:20px;">
+            <div id="name" class="output" style="font-weight: bold; font-size: 15px;">First Lastname</div>
+            <div id="department">Oklahoma Christian University Department</div>
+            <div id="title">Job Title</div>
+            <a id="phone" href="#" target="_blank" style="color: #801328 !important; text-decoration:none !important;"></a>
+            <a id="url" href="https://www.oc.edu" target="_blank" style="color: #801328 !important; text-decoration:none !important;">oc.edu</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- {% endspaceless %} -->
+
+</div>
+
+
+<div class="tip">3. Add it to your email client (need to add instructions below)</div>
+
+
+<script type="text/javascript">
+  // Watch inputs for changes
+  var inputs = document.getElementsByClassName('input');
+  for(let i = 0; i < inputs.length; i++) {
+    inputs[i].addEventListener('input', function() {
+      updateSig(i)
+    });
+  }
+  // Update the signature output
+  function updateSig(i) {
+    var el = inputs[i],
+        id = el.getAttribute('name'),
+        output = document.getElementById(id),
+        val = strip(el.value);
+    output.textContent = val;
+    if (id === 'phone' && val) {
+      output.append(' | ');
+      output.href = 'tel:' + val.replace(/\D/g,'');
+    } else if (id === 'url' && val) {
+      output.href = '//' + val;
+    }
+  }
+  // Strip tags and url protocol
+  function strip(string) {
+    return string.replace(/(<([^>]+)>)/ig,'').replace(/^(?:https?:\/\/)?(?:www\.)?/i,'');
+  }
+  // Copy output to clipboard
+  function copy() {
+    var str = document.getElementById('signature').innerHTML;
+    function listener(e) {
+      e.clipboardData.setData("text/html", str);
+      e.clipboardData.setData("text/plain", str);
+      e.preventDefault();
+    }
+    document.addEventListener("copy", listener);
+    document.execCommand("copy");
+    document.removeEventListener("copy", listener);
+  };
+</script>
