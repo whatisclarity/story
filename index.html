@@ -11,6 +11,16 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <style>
+    #btn {
+      position: fixed;
+      top: 0;
+      right: 0;
+      display: block;
+      width: 150px;
+      height: 150px;
+      z-index: 100;
+    }
+    #btn:focus {outline: none;}
     #canvas {
       background: #801328 url(https://oc.edu/dist/img/oc-logo-symbol.svg) no-repeat 100% 50px;
       background-size: 100px auto;
@@ -30,66 +40,130 @@
       display: table-cell;
       vertical-align: middle;
       padding: 20px;
+      overflow-wrap: anywhere;
+      hyphens: auto;
     }
     #type:empty::before {content: "Load this on your phone, type here, and take a screenshot when you're done.";}
     #type:empty:focus::before {content: "";}
-    #colors {
+    #toolsWrap {
       position: fixed;
       bottom: 0;
       width: 100%;
-      height: 100px;
+      height: 250px;
       z-index: 10;
-      display: flex;
+      flex-direction: column;
+      display: none;
     }
-    #colors a {
-      width: 50%;
+    .show-tools #toolsWrap {display: flex;}
+    #type:focus {outline: none;}
+    .tools {
+      display: flex;
+      flex: 1;
+    }
+    .tools > a {
+      display: flex;
+      flex: 1;
+      color: white;
+      text-decoration: none;
+      justify-content: center;
+      font-size: 30px;
+      font-weight: bold;
+      align-items: center;
       height: 100%;
     }
-    #colors:active,
-    #colors:focus {outline: none;}
+    .align-icon {
+      line-height: .3;
+      letter-spacing: -5px;
+    }
   </style>
 </head>
 
 <body>
-  <div id="colors">
-    <a href="javascript:void(0)" onclick="changeColors('prev')"></a>
-    <a href="javascript:void(0)" onclick="changeColors('next')"></a>
+  <a href="javascript:void(0)" id="btn" onclick="toggleTools()"></a>
+  <div id="toolsWrap">
+    <div class="tools" id="colors"></div>
+    <div class="tools" id="sizes">
+      <a href="javascript:void(0)" onclick="changeSize('down')">&minus;</a>
+      <a href="javascript:void(0)" onclick="changeSize('up')">&plus;</a>
+    </div>
+    <div class="tools" id="align">
+      <a class="align-icon" href="javascript:void(0)" onclick="align('left')">
+        ---<br/>
+        ----<br/>
+        --<br/>
+      </a>
+      <a class="align-icon" href="javascript:void(0)" onclick="align('center')" style="text-align:center;">
+        ---<br/>
+        ----<br/>
+        --<br/>
+      </a>
+      <a class="align-icon" href="javascript:void(0)" onclick="align('right')" style="text-align:right; line-height: .3;">
+        ---<br/>
+        ----<br/>
+        --<br/>
+      </a>
+    </div>
   </div>
   <div id="canvas">
-    <div contenteditable="true" id="type"></div>
+    <div contenteditable="true" id="type" spellcheck="false"></div>
   </div>
 
 <script>
-let i = 0;
-function changeColors(dir) {
-  let colors = [
-    '#801328',
-    '#f9c634',
-    '#f68d76',
-    '#f04e3e',
-    '#118acb',
-    '#708e9a',
-    '#004761',
-    //'#bde3dc',
-    '#5ec4b6',
-    '#27575a',
-    '#002e46'
-  ];
-  let canvas = document.getElementById('canvas');
-  let total = colors.length-1;
 
-  console.log(i, colors[i], dir);
+// Show/hide tools palette
+function toggleTools() {
+  document.body.classList.toggle('show-tools');
+}
+
+// Initialize colors switcher
+let colors = [
+  '#801328',
+  '#f9c634',
+  '#f68d76',
+  '#f04e3e',
+  '#118acb',
+  '#708e9a',
+  '#004761',
+  '#5ec4b6',
+  '#27575a',
+  '#002e46'
+];
+let canvas = document.getElementById('canvas');
+let colorsEl = document.getElementById('colors');
+let links = '';
+for (i = 0; i < colors.length; i++) {
+  links += '<a href="javascript:void(0);" onclick="changeColors('+i+')" style="background:'+colors[i]+'"></a>'
+}
+colorsEl.innerHTML = links;
+
+// Change colors
+function changeColors(i) {
   canvas.style.backgroundColor = colors[i];
+}
 
-  if (dir == 'next') {
-    i < total ? i++ : i=0;
+// Initialize sizes
+let sizes = [
+  '25px',
+  '35px',
+  '45px',
+  '55px',
+];
+let total = sizes.length-1;
+let z = 1;
+
+// Change sizes
+function changeSize(dir) {
+  if (dir == 'up') {
+    z < total ? z++ : z=total;
   } else {
-    i > 0 ? i-- : i=total
+    z > 0 ? z-- : z=0
   }
+  canvas.style.fontSize = sizes[z];
+}
 
-  console.log(i, colors[i], dir);
-  canvas.style.backgroundColor = colors[i];
-
+//Initialize alignment
+function align(align) {
+  canvas.style.textAlign = align;
 }
 </script>
 
