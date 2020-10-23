@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Costs</title>
+    <style>
+      body {
+        padding: 100px;
+        text-align: center;
+      }
+      input {
+        min-width: 20%;
+      }
+      .divider {
+        display: inline-block;
+        margin: 0 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form>
+      <!-- <input type="number" id="gpa" min="0" max="4" placeholder="Your GPA" />
+      <input type="number" id="act" min="1" max="36" step="1" width="100" placeholder="Your ACT score" /> -->
+      <!-- GPA -->
+      <label for="gpa">Your GPA:</label>
+      <select id="gpa">
+        <option value="4.0">4.00</option>
+
+        <option value="3.95">3.95</option>
+        <option value="3.90">3.90</option>
+        <option value="3.85">3.85</option>
+        <option value="3.80">3.80</option>
+        <option value="3.75">3.75</option>
+        <option value="3.70">3.70</option>
+        <option value="3.65">3.65</option>
+        <option value="3.60">3.60</option>
+        <option value="3.55">3.55</option>
+        <option value="3.50">3.50</option>
+        <option value="3.45">3.45</option>
+        <option value="3.40">3.40</option>
+        <option value="3.35">3.35</option>
+        <option value="3.30">3.30</option>
+        <option value="3.25">3.25</option>
+        <option value="3.20">3.20</option>
+        <option value="3.15">3.15</option>
+        <option value="3.10">3.10</option>
+        <option value="3.05">3.05</option>
+        <option value="3.00">3.00</option>
+
+        <option value="2.95">2.95</option>
+        <option value="2.90">2.90</option>
+        <option value="2.85">2.85</option>
+        <option value="2.80">2.80</option>
+        <option value="2.75">2.75</option>
+        <option value="2.70">2.70</option>
+        <option value="2.65">2.65</option>
+        <option value="2.60">2.60</option>
+        <option value="2.55">2.55</option>
+        <option value="2.50">2.50</option>
+        <option value="2.45">2.45</option>
+        <option value="2.40">2.40</option>
+        <option value="2.35">2.35</option>
+        <option value="2.30">2.30</option>
+        <option value="2.25">2.25</option>
+        <option value="2.20">2.20</option>
+        <option value="2.15">2.15</option>
+        <option value="2.10">2.10</option>
+        <option value="2.05">2.05</option>
+        <option value="2.00">2.00</option>
+      </select>
+      <!-- / GPA -->
+
+      <span class="divider">|</span>
+
+      <!-- Test score -->
+      <label for="test">Your test score:</label>
+      <select id="test">
+        <optgroup label="ACT">
+          <option value="36">36</option>
+          <option value="35">35</option>
+          <option value="34">34</option>
+          <option value="33">33</option>
+          <option value="32">32</option>
+          <option value="31">31</option>
+          <option value="30">30</option>
+          <option value="29">29</option>
+          <option value="28">28</option>
+          <option value="27">27</option>
+          <option value="26">26</option>
+          <option value="25">25</option>
+          <option value="24">24</option>
+          <option value="23">23</option>
+          <option value="22">22</option>
+          <option value="21">21</option>
+          <option value="20">20</option>
+          <option value="19">19</option>
+          <option value="18">18</option>
+          <option value="17">17</option>
+        </optgroup>
+        <optgroup label="SAT">
+          <option value="36">1570-1600</option>
+          <option value="35">1530-1560</option>
+          <option value="34">1490-1520</option>
+          <option value="33">1450-1480</option>
+          <option value="32">1420-1440</option>
+          <option value="31">1390-1410</option>
+          <option value="30">1360-1380</option>
+          <option value="29">1330-1350</option>
+          <option value="28">1300-1320</option>
+          <option value="27">1260-1290</option>
+          <option value="26">1230-1250</option>
+          <option value="25">1200-1220</option>
+          <option value="24">1160-1190</option>
+          <option value="23">1130-1150</option>
+          <option value="22">1100-1120</option>
+          <option value="21">1060-1090</option>
+          <option value="20">1030-1050</option>
+          <option value="19">990-1020</option>
+          <option value="18">960-980</option>
+          <option value="17">920-950</option>
+        </optgroup>
+        <optgroup label="CLT">
+          <option value="36">111-120</option>
+          <option value="35">107-110</option>
+          <option value="34">103-106</option>
+          <option value="33">100-102</option>
+          <option value="32">97-99</option>
+          <option value="31">94-96</option>
+          <option value="30">92-93</option>
+          <option value="29">89-91</option>
+          <option value="28">86-88</option>
+          <option value="27">84-85</option>
+          <option value="26">81-83</option>
+          <option value="25">78-80</option>
+          <option value="24">76-77</option>
+          <option value="23">74-75</option>
+          <option value="22">72-73</option>
+          <option value="21">68-71</option>
+          <option value="20">66-67</option>
+          <option value="19">64-65</option>
+          <option value="18">61-63</option>
+          <option value="17">57-60</option>
+        </optgroup>
+      </select>
+      <!-- / Test score -->
+
+      <span class="divider">|</span>
+
+      <button id="submit" type="button" onclick="tally()">Submit</button>
+    </form>
+
+    <p id="estimate"></p>
+    <code id="log"></code>
+
+    <script type="text/javascript">
+      function tally() {
+        var gpa = Number(document.getElementById("gpa").value);
+        var test = Number(document.getElementById("test").value);
+        //var score = gpa + test;
+        var score = (test * (5/3)) + (gpa * 10);
+        console.log(score);
+        document.getElementById("estimate").innerText =
+          "Your estimated award is " + award(score);
+        console.log(award(score));
+        document.getElementById("log").innerText =
+          "Calculated score: " + score;
+      }
+
+      function award(score) {
+        if (score >= 48.33 && score < 59) {
+          return "$4,000";
+        } else if (score >= 59 && score < 70) {
+          return "$6,000";
+        } else if (score >= 70 && score < 85) {
+          return "$8,000";
+        } else if (score >= 85 && score < 92) {
+          return "$10,000";
+        } else if (score >= 92) {
+          return "$12,000";
+        } else {
+          return "nope";
+        }
+      }
+    </script>
+  </body>
+</html>
