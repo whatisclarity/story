@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <style>
+      * {margin: 0; padding: 0; box-sizing: border-box;}
+      body {padding: 20px;}
+      #input {
+        width: 90%; height:75vh; overflow: auto; border:1px solid #ddd; padding:20px; margin: 20px 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h3>Paste captions below</h3>
+    <pre id="input" contenteditable="true" style=""></pre>
+    <button onclick="highlight()">Test Captions</button>
+    <br/>
+    <br/>
+    <div>
+      <span id="log"></span>
+      <span id="controls" style="display:none;">
+        &bull;
+        <a href="javascript:void(0)" onclick="traverse('prev')">&uarr; prev</a>
+        |
+        <a href="javascript:void(0)" onclick="traverse('next')">&darr; next</a>
+      </span>
+    </div>
+
+
+<script type="text/javascript" src="cc/hilitor.js"></script>
+<script type="text/javascript">
+
+  var input = document.getElementById('input');
+  var watch = new Hilitor("input"); // id of the element to parse
+  var log = document.getElementById('log');
+  var controls = document.getElementById('controls');
+  var matches = [];
+
+  // input.addEventListener('change', highlight);
+  // input.addEventListener('focus', highlight);
+  // input.addEventListener('blur', highlight);
+
+  function highlight() {
+    watch.apply("jaundice jaundiced tiger jesus love");
+    input.scrollTop = 0;
+    count();
+  }
+
+  function count() {
+    matches = document.querySelectorAll('#input mark');
+    var message = matches.length > 0 ? matches.length + ' errors found.' : 'No errors found. You\'re good to go!';
+    log.innerHTML = message;
+    if (matches.length > 0) {
+      // console.log(matches.item(1));
+      controls.style.display = 'inline-block';
+      matches.item(0).scrollIntoView();
+    } else {
+      controls.style.display = 'none';
+    }
+  }
+
+  var i = 0;
+  function traverse(dir) {
+    // console.log(dir);
+    if (matches.length = 0) {
+      return false;
+    }
+    if (dir == 'next') {
+      if (i < matches.length-1) {
+        i++;
+      }
+    } else {
+      if (i > 0 ) {
+        i--;
+      }
+    };
+    // console.log(i, matches.item(i));
+    matches.item(i).scrollIntoView();
+  }
+
+
+</script>
+  </body>
+</html>
