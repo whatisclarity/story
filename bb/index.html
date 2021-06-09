@@ -11,13 +11,13 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="/bb/js/html2canvas.min.js"></script>
+  <script type="text/javascript" src="js/html2canvas.min.js"></script>
 
   <style>
     @font-face {
       font-family: 'Standard CT';
-      src: url('/bb/fonts/standardextracond-medium-2015.02.25-webfont.woff2') format('woff2'),
-           url('/bb/fonts/standardextracond-medium-2015.02.25-webfont.woff') format('woff');
+      src: url('fonts/standardextracond-medium-2015.02.25-webfont.woff2') format('woff2'),
+           url('fonts/standardextracond-medium-2015.02.25-webfont.woff') format('woff');
       font-weight: normal;
       font-style: normal;
     }
@@ -44,7 +44,7 @@
       outline: 10px solid #801328; */
     }
     #img {
-      background: url(/bb/img/baja.jpg) no-repeat center;
+      background: url(img/baja.jpg) no-repeat center;
       background-size: cover;
       height: 500px;
       width: 500px;
@@ -66,8 +66,8 @@
       right: 0;
       width: 88px;
       height: 57px;
-      -webkit-mask-image: url(/bb/oc-logo-symbol.svg);
-      mask-image: url(/bb/oc-logo-symbol.svg);
+      -webkit-mask-image: url(oc-logo-symbol.svg);
+      mask-image: url(oc-logo-symbol.svg);
     }
     #type * {outline: none;}
     #typeSm {
@@ -201,9 +201,9 @@ function changeLayout(layout) {
 
 // Images
 const images = [
-  '/bb/img/baja.jpg',
-  '/bb/img/graduation.jpg',
-  '/bb/img/ike.jpg'
+  'img/baja.jpg',
+  'img/graduation.jpg',
+  'img/ike.jpg'
 ];
 
 function random(max) {
