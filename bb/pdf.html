@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" type="image/png" href="https://www.oc.edu/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="OC Story Maker">
+  <link rel="mask-icon" href="https://www.oc.edu/safari-pinned-tab.svg" color="#801328">
+  <title>OC Blackboard Banner Builder</title>
+  <link rel="stylesheet" href="https://use.typekit.net/nyp5qmz.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+  <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
+  <style>
+    @font-face {
+      font-family: 'Standard CT';
+      src: url('/bb/fonts/standardextracond-medium-2015.02.25-webfont.woff2') format('woff2'),
+           url('/bb/fonts/standardextracond-medium-2015.02.25-webfont.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+    body {
+      background: #f4f4f4;
+      color: #801328;
+      font-family: sofia-pro, sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      font-style: normal;
+    }
+    a {color: #333;
+    text-decoration: none;}
+    #canvas {
+      background: #fff;
+      border: 1px solid #ccc;
+      display: flex;
+      flex-direction: row;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 11in;
+      height: 8.5in;
+      /* border: 1px dashed rgba(255,255,255,.8);
+      outline: 10px solid #801328; */
+    }
+    #type {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-transform: uppercase;
+      padding: 80px;
+      position: relative;
+      flex-grow: 1;
+    }
+    #logo {
+      background-color: #fff;
+      position: absolute;
+      top: 20px;
+      right: 0;
+      width: 88px;
+      height: 57px;
+      -webkit-mask-image: url(/bb/oc-logo-symbol.svg);
+      mask-image: url(/bb/oc-logo-symbol.svg);
+    }
+    #type * {outline: none;}
+    #typeSm {
+      color: #f9c634;
+      font-size: 20px;
+      letter-spacing: 5px;
+      line-height: 1;
+      margin-bottom:20px;
+      z-index: 10;
+      -webkit-font-smoothing: antialiased;
+    }
+    #typeLg {
+      color: #fff;
+      font-family: 'Standard CT';
+      font-size: 160px;
+      font-weight: normal;
+      line-height: .85;
+    }
+
+    /* nav */
+    #nav {
+      background: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;;
+      padding: 1rem;
+      position: fixed;
+      text-align: center;
+      top: 0;
+      width: 100%;
+    }
+    #nav > * {
+      margin: 0 5px;
+    }
+    .swatch {
+      display: inline-block;
+      margin: 0 5px;
+      border-radius: 50px;
+      width: 30px;
+      height: 30px;
+    }
+    .swatch#colors-1 {background: #801328;}
+    .swatch#colors-2 {background: #27575a;}
+    .swatch#colors-3 {background: #004761;}
+
+    .layout-icon {
+      background: #fff;
+      border:2px solid transparent;
+      border-radius: 5px;
+      line-height: 1;
+      font-size: 14px;
+      padding: 10px;
+    }
+    .layout-icon:hover {
+      color: #801328;
+    }
+    .layout-1 #layout-1,
+    .layout-2 #layout-2,
+    .layout-3 #layout-3,
+    .layout-4 #layout-4,
+    .layout-5 #layout-5 {border-color: #801328; color: #801328;}
+
+    /* color schemes */
+    .colors-1 #canvas {background-color: #fff; outline-color: #801328;}
+    .colors-1 #logo {background-color: #801328;}
+    .colors-1 #typeSm {color: #27575a;}
+    .colors-1 #typeLg {color: #801328;}
+
+    .colors-2 #canvas {background-color: #27575a; outline-color: #27575a;}
+    .colors-2 #logo {background-color: #fff;}
+    .colors-2 #typeSm {color: #bde3dc;}
+    .colors-2 #typeLg {color: #fff;}
+
+    .colors-3 #canvas {background-color: #118acb; outline-color: #118acb;}
+    .colors-3 #logo {background-color: #fff;}
+    .colors-3 #typeSm {color: #004761;}
+    .colors-3 #typeLg {color: #fff;}
+
+    /* layouts */
+    .layout-1 #canvas {flex-direction: row;}
+    .layout-2 #img {width: 50%;}
+    .layout-3 #canvas {flex-direction: row-reverse;}
+    .layout-4 #canvas {flex-direction: row-reverse;}
+    .layout-4 #img {width: 50%;}
+    .layout-5 #img {display: none;}
+  </style>
+</head>
+
+<body class="colors-1 layout-1">
+  <div id="nav">
+    <span>Color:</span>
+    <a href="javascript:void(0)" onclick="changeColors(this.id)" class="swatch" id="colors-1"></a>
+    <a href="javascript:void(0)" onclick="changeColors(this.id)" class="swatch" id="colors-2"></a>
+    <a href="javascript:void(0)" onclick="changeColors(this.id)" class="swatch" id="colors-3"></a>
+    <span style="margin: 0 10px;">|</span>
+    <span>Layout:</span>
+    <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-1">[•] ===</a>
+    <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-2">[&nbsp;&nbsp;•&nbsp;&nbsp;] ==</a>
+    <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-3">=== [•]</a>
+    <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-4">== [&nbsp;&nbsp;•&nbsp;&nbsp;]</a>
+    <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-5">====</a>
+    <span style="margin: 0 10px;">|</span>
+    <a href="javascript:void(0)" onclick="savePdf()">Save as PDF &darr;</a>
+  </div>
+
+  <div id="canvas" class="html-content">
+    <div id="type">
+      <div id="logo"></div>
+      <div id="typeSm" contenteditable="true" spellcheck="false">Small Heading Text</div>
+      <div id="typeLg" contenteditable="true" spellcheck="false">Large Heading</div>
+    </div>
+  </div>
+
+<script>
+
+// Change colors
+function changeColors(color) {
+  console.log(color);
+  document.body.classList.remove('colors-1','colors-2','colors-3');
+  document.body.classList.add(color);
+}
+
+// Change layout
+function changeLayout(layout) {
+  console.log(layout);
+  document.body.classList.remove('layout-1','layout-2','layout-3','layout-4','layout-5');
+  document.body.classList.add(layout);
+}
+
+//Create PDf from HTML...
+function savePdf() {
+    var HTML_Width = $(".html-content").width();
+    var HTML_Height = $(".html-content").height();
+    var PDF_Width = HTML_Width;
+    var PDF_Height = HTML_Height;
+    var canvas_image_width = HTML_Width;
+    var canvas_image_height = HTML_Height;
+
+    html2canvas($(".html-content")[0], {
+      scale: 3 // this affects resolution
+    }).then(function (canvas) {
+        var imgData = canvas.toDataURL("image/jpeg", 1.0);
+        var pdf = new jsPDF('l', 'in', 'letter');
+        pdf.addImage(imgData, 'JPG', 0, 0, 11, 8.5);
+        pdf.save("file.pdf");
+    });
+}
+
+</script>
+
+</body>
+</html>
