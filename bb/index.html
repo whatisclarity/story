@@ -21,6 +21,9 @@
       font-weight: normal;
       font-style: normal;
     }
+    #canvas * {
+      transition: all .15s ease-out;
+    }
     body {
       color: #801328;
       font-family: sofia-pro, sans-serif;
@@ -44,7 +47,7 @@
       outline: 10px solid #801328; */
     }
     #img {
-      background: url(img/baja.jpg) no-repeat center;
+      background: rgba(0,0,0,.6) url(img/campus1.jpg) no-repeat center;
       background-size: cover;
       height: 500px;
       width: 500px;
@@ -60,14 +63,11 @@
       flex-grow: 1;
     }
     #logo {
-      background-color: #fff;
       position: absolute;
       top: 20px;
       right: 0;
-      width: 88px;
-      height: 57px;
-      -webkit-mask-image: url(oc-logo-symbol.svg);
-      mask-image: url(oc-logo-symbol.svg);
+      width: 90px;
+      height: 61px;
     }
     #type * {outline: none;}
     #typeSm {
@@ -112,7 +112,9 @@
     }
     .swatch#colors-1 {background: #801328;}
     .swatch#colors-2 {background: #27575a;}
-    .swatch#colors-3 {background: #004761;}
+    .swatch#colors-3 {background: #118acb;}
+    .swatch#colors-4 {background: #F04F3E;}
+    .swatch#colors-5 {background: #bde3dc;}
 
     .layout-icon {
       background: #fff;
@@ -132,20 +134,25 @@
     .layout-5 #layout-5 {border-color: #801328; color: #801328;}
 
     /* color schemes */
-    .colors-1 #canvas {background-color: #801328; outline-color: #801328;}
-    .colors-1 #logo {background-color: #fff;}
+    .colors-1 #canvas {background-color: #801328;}
     .colors-1 #typeSm {color: #f9c634;}
     .colors-1 #typeLg {color: #fff;}
 
-    .colors-2 #canvas {background-color: #27575a; outline-color: #27575a;}
-    .colors-2 #logo {background-color: #fff;}
+    .colors-2 #canvas {background-color: #27575a;}
     .colors-2 #typeSm {color: #bde3dc;}
     .colors-2 #typeLg {color: #fff;}
 
-    .colors-3 #canvas {background-color: #118acb; outline-color: #118acb;}
-    .colors-3 #logo {background-color: #fff;}
+    .colors-3 #canvas {background-color: #118acb;}
     .colors-3 #typeSm {color: #004761;}
     .colors-3 #typeLg {color: #fff;}
+
+    .colors-4 #canvas {background-color: #F04F3E;}
+    .colors-4 #typeSm {color: #801328;}
+    .colors-4 #typeLg {color: #fff;}
+
+    .colors-5 #canvas {background-color: #bde3dc;}
+    .colors-5 #typeSm {color: #f04e3e;}
+    .colors-5 #typeLg {color: #27575a;}
 
     /* layouts */
     .layout-1 #canvas {flex-direction: row;}
@@ -163,6 +170,8 @@
     <a href="javascript:void(0)" onclick="changeColors(this.id)" class="swatch" id="colors-1"></a>
     <a href="javascript:void(0)" onclick="changeColors(this.id)" class="swatch" id="colors-2"></a>
     <a href="javascript:void(0)" onclick="changeColors(this.id)" class="swatch" id="colors-3"></a>
+    <a href="javascript:void(0)" onclick="changeColors(this.id)" class="swatch" id="colors-4"></a>
+    <a href="javascript:void(0)" onclick="changeColors(this.id)" class="swatch" id="colors-5"></a>
     <span style="margin: 0 10px;">|</span>
     <span>Layout:</span>
     <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-1">[•] ===</a>
@@ -175,9 +184,9 @@
   </div>
 
   <div id="canvas">
+    <img id="logo" src="oc-logo-symbol.png" width="90" height="61" />
     <div id="img" onclick="changeImg()"></div>
     <div id="type">
-      <div id="logo"></div>
       <div id="typeSm" contenteditable="true" spellcheck="false">Click here to type</div>
       <div id="typeLg" contenteditable="true" spellcheck="false">Click here to type</div>
     </div>
@@ -188,7 +197,7 @@
 // Change colors
 function changeColors(color) {
   console.log(color);
-  document.body.classList.remove('colors-1','colors-2','colors-3');
+  document.body.classList.remove('colors-1','colors-2','colors-3','colors-4','colors-5','colors-6');
   document.body.classList.add(color);
 }
 
@@ -201,9 +210,58 @@ function changeLayout(layout) {
 
 // Images
 const images = [
-  'img/baja.jpg',
-  'img/graduation.jpg',
-  'img/ike.jpg'
+  'img/art1.jpg',
+  'img/art2.jpg',
+  'img/art3.jpg',
+  'img/art4.jpg',
+  'img/bible1.jpg',
+  'img/biology1.jpg',
+  'img/biology2.jpg',
+  'img/business1.jpg',
+  'img/business2.jpg',
+  'img/campus1.jpg',
+  'img/campus2.jpg',
+  'img/campus3.jpg',
+  'img/campus4.jpg',
+  'img/campus5.jpg',
+  'img/campus6.jpg',
+  'img/computer1.jpg',
+  'img/computer2.jpg',
+  'img/computer3.jpg',
+  'img/computer4.jpg',
+  'img/education1.jpg',
+  'img/engineering1.jpg',
+  'img/engineering2.jpg',
+  'img/engineering3.jpg',
+  'img/engineering4.jpg',
+  'img/engineering5.jpg',
+  'img/engineering6.jpg',
+  'img/engineering7.jpg',
+  'img/engineering8.jpg',
+  'img/english1.jpg',
+  'img/english2.jpg',
+  'img/gaming2.jpg',
+  'img/gaming3.jpg',
+  'img/gaming4.jpg',
+  'img/gaming5.jpg',
+  'img/graduation1.jpg',
+  'img/ike1.jpg',
+  'img/ike2.jpg',
+  'img/interiordesign1.jpg',
+  'img/math1.jpg',
+  'img/media1.jpg',
+  'img/music1.jpg',
+  'img/music2.jpg',
+  'img/nursing1.jpg',
+  'img/nursing2.jpg',
+  'img/nursing3.jpg',
+  'img/science1.jpg',
+  'img/science2.jpg',
+  'img/science3.jpg',
+  'img/science4.jpg',
+  'img/studyabroad1.jpg',
+  'img/studyabroad2.jpg',
+  'img/studyabroad3.jpg'
 ];
 
 function random(max) {
