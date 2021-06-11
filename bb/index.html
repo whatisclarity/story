@@ -14,6 +14,15 @@
   <script type="text/javascript" src="js/html2canvas.min.js"></script>
 
   <style>
+    :root {
+      --maroon: #801328;
+      --teal: #27575a;
+      --royal: #118acb;
+      --redOrange: #F04F3E;
+      --sky: #bde3dc;
+      --marigold: #f9c634;
+      --storm: #004761;
+    }
     @font-face {
       font-family: 'Standard CT';
       src: url('fonts/standardextracond-medium-2015.02.25-webfont.woff2') format('woff2'),
@@ -23,6 +32,9 @@
     }
     #canvas * {
       transition: all .15s ease-out;
+    }
+    #canvas {
+      transition: height .15s ease-out, width .15s ease-out;
     }
     body {
       color: #801328;
@@ -46,10 +58,24 @@
       /* border: 1px dashed rgba(255,255,255,.8);
       outline: 10px solid #801328; */
     }
+    .sm #canvas {
+      height: 300px;
+      width: 1500px;
+    }
+    .md #canvas {
+      height: 500px;
+      width: 1500px;
+    }
+    .lg #canvas {
+      height: 700px;
+      width: 1500px;
+    }
     #img {
       background: rgba(0,0,0,.6) url(img/campus1.jpg) no-repeat center;
       background-size: cover;
-      height: 500px;
+      cursor: pointer;
+      /* height: 500px; */
+      height: 100%;
       width: 500px;
       flex-shrink: 0;
     }
@@ -86,6 +112,12 @@
       font-weight: normal;
       line-height: .85;
     }
+    .sm #type {
+      padding: 60px;
+    }
+    .sm #typeLg {
+      font-size: 110px;
+    }
 
     /* nav */
     #nav {
@@ -109,6 +141,8 @@
       border-radius: 50px;
       width: 30px;
       height: 30px;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 2px #fff;
     }
     .swatch#colors-1 {background: #801328;}
     .swatch#colors-2 {background: #27575a;}
@@ -116,41 +150,70 @@
     .swatch#colors-4 {background: #F04F3E;}
     .swatch#colors-5 {background: #bde3dc;}
 
+    .colors-1 #colors-1,
+    .colors-2 #colors-2,
+    .colors-3 #colors-3,
+    .colors-4 #colors-4,
+    .colors-5 #colors-5 {box-shadow: 0 0 0 2px var(--redOrange);}
+
     .layout-icon {
       background: #fff;
       border:2px solid transparent;
       border-radius: 5px;
-      line-height: 1;
-      font-size: 14px;
-      padding: 10px;
+      padding: 3px;
     }
-    .layout-icon:hover {
-      color: #801328;
+
+    .icon-wrap {
+      background: --var(maroon);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      width: 90px;
     }
+    .icon-wrap .thumb {
+      background-color: rgba(0,0,0,.65);
+      background-size: cover;
+      height: 30px;
+    }
+    .icon-wrap b {
+      flex-grow: 1;
+      height: 3px;
+      border-top: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      margin: 0 14px;
+      opacity: .3;
+    }
+    .colors-1 .icon-wrap {background: var(--maroon);}
+
     .layout-1 #layout-1,
     .layout-2 #layout-2,
     .layout-3 #layout-3,
     .layout-4 #layout-4,
-    .layout-5 #layout-5 {border-color: #801328; color: #801328;}
+    .layout-5 #layout-5 {border-color: var(--redOrange);}
 
     /* color schemes */
-    .colors-1 #canvas {background-color: #801328;}
+    .colors-1 #canvas,
+    .colors-1 .icon-wrap {background-color: #801328;}
     .colors-1 #typeSm {color: #f9c634;}
     .colors-1 #typeLg {color: #fff;}
 
-    .colors-2 #canvas {background-color: #27575a;}
+    .colors-2 #canvas,
+    .colors-2 .icon-wrap {background-color: #27575a;}
     .colors-2 #typeSm {color: #bde3dc;}
     .colors-2 #typeLg {color: #fff;}
 
-    .colors-3 #canvas {background-color: #118acb;}
+    .colors-3 #canvas,
+    .colors-3 .icon-wrap {background-color: #118acb;}
     .colors-3 #typeSm {color: #004761;}
     .colors-3 #typeLg {color: #fff;}
 
-    .colors-4 #canvas {background-color: #F04F3E;}
+    .colors-4 #canvas,
+    .colors-4 .icon-wrap {background-color: #F04F3E;}
     .colors-4 #typeSm {color: #801328;}
     .colors-4 #typeLg {color: #fff;}
 
-    .colors-5 #canvas {background-color: #bde3dc;}
+    .colors-5 #canvas,
+    .colors-5 .icon-wrap {background-color: #bde3dc;}
     .colors-5 #typeSm {color: #f04e3e;}
     .colors-5 #typeLg {color: #27575a;}
 
@@ -172,13 +235,48 @@
     <a href="javascript:void(0)" onclick="changeColors(this.id)" class="swatch" id="colors-3"></a>
     <a href="javascript:void(0)" onclick="changeColors(this.id)" class="swatch" id="colors-4"></a>
     <a href="javascript:void(0)" onclick="changeColors(this.id)" class="swatch" id="colors-5"></a>
-    <span style="margin: 0 10px;">|</span>
+
+    <span style="margin: 0 20px;">|</span>
+
     <span>Layout:</span>
-    <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-1">[•] ===</a>
-    <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-2">[&nbsp;&nbsp;•&nbsp;&nbsp;] ==</a>
-    <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-3">=== [•]</a>
-    <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-4">== [&nbsp;&nbsp;•&nbsp;&nbsp;]</a>
-    <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-5">====</a>
+    <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-1">
+      <div class="icon-wrap">
+        <span class="thumb" style="width:30px;"></span>
+        <b></b>
+      </div>
+    </a>
+    <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-2">
+      <div class="icon-wrap">
+        <span class="thumb" style="width:45px;"></span>
+        <b></b>
+      </div>
+    </a>
+    <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-3">
+      <div class="icon-wrap" style="justify-content: flex-end;">
+        <b></b>
+        <span class="thumb" style="width:30px;"></span>
+      </div>
+    </a>
+    <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-4">
+      <div class="icon-wrap" style="justify-content: flex-end;">
+        <b></b>
+        <span class="thumb" style="width:45px;"></span>
+      </div>
+    </a>
+    <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-5">
+      <div class="icon-wrap" style="justify-content: flex-end;">
+        <b></b>
+        <span class="thumb" style="width:0px;"></span>
+      </div>
+    </a>
+
+    <span style="margin: 0 20px;">|</span>
+
+    <a href="javascript:void(0)" onclick="changeSize('sm')">Small</a>
+    <a href="javascript:void(0)" onclick="changeSize('md')">Medium</a>
+    <a href="javascript:void(0)" onclick="changeSize('lg')">Large</a>
+
+    <span style="margin: 0 20px;">|</span>
 
     <a href="javascript:void(0)" id="btnSave2">Download image &darr;</a>
   </div>
@@ -206,6 +304,25 @@ function changeLayout(layout) {
   console.log(layout);
   document.body.classList.remove('layout-1','layout-2','layout-3','layout-4','layout-5');
   document.body.classList.add(layout);
+}
+
+// Change size
+function changeSize(size) {
+  const canvas = document.getElementById('canvas');
+  console.log(size);
+  document.body.classList.remove('sm','md','lg');
+  document.body.classList.add(size);
+
+  // if (size == 's') {
+  //   canvas.style.height = '400px';
+  //   canvas.style.width = '1200px';
+  // } else if (size == 'l') {
+  //   canvas.style.height = '700px';
+  //   canvas.style.width = '1400px';
+  // } else {
+  //   canvas.style.height = '500px';
+  //   canvas.style.width = '1500px';
+  // }
 }
 
 // Images
@@ -269,10 +386,18 @@ function random(max) {
 }
 
 const img = document.getElementById('img');
+const thumbs = document.getElementsByClassName('thumb');
+console.log(thumbs);
 
 function changeImg() {
   var rand = random(images.length)
-  img.setAttribute('style', 'background-image: url('+images[rand]+')');
+  // img.setAttribute('style', 'background-image: url('+images[rand]+')');
+  img.style.backgroundImage = 'url('+images[rand]+')';
+  var i;
+  for (i = 0; i < thumbs.length; i++) {
+    thumbs[i].style.backgroundImage = 'url('+images[rand]+')';
+  }
+
   console.log(images[rand]);
 }
 
