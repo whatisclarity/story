@@ -55,6 +55,16 @@
                         </div>
                     </div>
                 </a>
+                <a href="#" @click.prevent="layout = 'layout-4'">
+                    <div class="thumb flex flex-col layout-4 border-4 border-white rounded-md m-1" :class="scheme">
+                        <div class="img bg-black bg-opacity-50">
+                            <img v-if="img" :src="img" class="object-cover w-full h-full" />
+                        </div>
+                        <div class="text flex-1 flex text-white items-center justify-center">
+                            <div class="border-t border-b border-white h-2 w-2/3 opacity-50 my-2"></div>
+                        </div>
+                    </div>
+                </a>
                 <a href="#" @click.prevent="layout = 'layout-3'">
                     <div class="thumb flex flex-col layout-3 border-4 border-white rounded-md m-1" :class="scheme">
                         <div class="img bg-black bg-opacity-50">
@@ -72,6 +82,16 @@
                         </div>
                         <div class="text flex-1 flex text-white items-center justify-center">
                             <div class="border-t border-b border-white h-2 w-2/3 opacity-50"></div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" @click.prevent="layout = 'layout-4 reverse'">
+                    <div class="thumb flex flex-col layout-4 flex-col-reverse border-4 border-white rounded-md m-1" :class="scheme">
+                        <div class="img bg-black bg-opacity-50">
+                            <img v-if="img" :src="img" class="object-cover w-full h-full" />
+                        </div>
+                        <div class="text flex-1 flex text-white items-center justify-center">
+                            <div class="border-t border-b border-white h-2 w-2/3 opacity-50 my-2"></div>
                         </div>
                     </div>
                 </a>
@@ -114,8 +134,8 @@
         <div class="rounded-4xl bg-white px-4 pt-14 py-20 inline-block border-2">
             <div class="border">
                 <div id="canvas" class="flex flex-col relative" :class="scheme, layout">
-                    <img v-if="scheme === 'scheme-9' || scheme === 'scheme-10' || scheme === 'scheme-14'" src="oc-logo-maroon.png" class="absolute top-4 right-0 z-10" width="90" height="61" />
-                    <img v-else src="oc-logo-white.png" class="absolute top-4 right-0 z-10" width="90" height="61" />
+                    <img v-if="scheme === 'scheme-9' || scheme === 'scheme-10' || scheme === 'scheme-14'" src="oc-logo-maroon.png" class="logo absolute top-4 right-0 z-10" width="90" height="61" />
+                    <img v-else src="oc-logo-white.png" class="logo absolute top-4 right-0 z-10" width="90" height="61" />
 
                     <div class="img bg-cover bg-center" :style="{ backgroundImage: 'url(' + img + ')' }">
                         <!-- <img v-if="img" :src="img" class="object-cover w-full h-full" /> -->

@@ -74,6 +74,8 @@
 .bg-ethos       {background-color: var(--ethos);}
 .bg-gray        {background-color: #333;}
 
+h1 {font-size: 3.25rem;}
+
 /* layout-1: no image */
 .layout-1 .img {height: 0;}
 .layout-1 h1 {font-size: 3.75rem;}
@@ -83,12 +85,18 @@
 
 /* layout-3: 1/2 image */
 .layout-3 .img {height: 50%;}
-.layout-2 h1,
-.layout-3 h1 {font-size: 3.25rem;}
+/* .layout-2 h1,
+.layout-3 h1 {font-size: 3.25rem;} */
 
-/* layouts 3 & 4: reverse text and image */
+.layout-4 .img {height: auto; flex-grow: 1;}
+.layout-4 .text {height: auto; flex-grow: 0;}
+
+/* reverse text and image */
 .reverse {flex-direction: column-reverse;}
 .reverse .text {padding-top: 5rem;}
+
+.layout-4.reverse .text {padding-top: 2rem;}
+.layout-4.reverse .logo {top: auto; bottom: 1rem;}
 
 .scheme-1 {background-color: var(--maroon);}
 .scheme-2 {background-color: var(--teal);}
