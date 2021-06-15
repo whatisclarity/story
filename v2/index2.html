@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" type="image/png" href="https://www.oc.edu/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="OC Story Maker">
+  <link rel="mask-icon" href="https://www.oc.edu/safari-pinned-tab.svg" color="#801328">
+  <title>OC Story Maker</title>
+  <link rel="stylesheet" href="https://use.typekit.net/nyp5qmz.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="../bb/js/html2canvas.min.js"></script>
+
+  <style>
+    :root {
+      --maroon: #801328;
+      --teal: #27575a;
+      --royal: #118acb;
+      --redOrange: #F04F3E;
+      --sky: #bde3dc;
+      --marigold: #f9c634;
+      --storm: #004761;
+    }
+    @font-face {
+      font-family: 'Standard CT';
+      src: url('../bb/fonts/standardextracond-medium-2015.02.25-webfont.woff2') format('woff2'),
+           url('../bb/fonts/standardextracond-medium-2015.02.25-webfont.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+    * {box-sizing: border-box;}
+    #canvas * {
+      transition: all .15s ease-out;
+    }
+    #canvas {
+      transition: height .15s ease-out, width .15s ease-out;
+    }
+    body {
+      color: #801328;
+      font-family: sofia-pro, sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      font-style: normal;
+    }
+    a {
+        color: #333;
+        text-decoration: none;
+    }
+    #nav, #nav a {color: #fff;}
+    #canvas {
+      background: #801328;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      /* top: 50%; */
+      /* left: 50%; */
+      /* transform: translate(-50%, -50%); */
+      width: 375px;
+      height: 667px;
+      /* border: 1px dashed rgba(255,255,255,.8);
+      outline: 10px solid #801328; */
+    }
+    .sm #canvas {
+      height: 300px;
+      width: 1500px;
+    }
+    .md #canvas {
+      height: 500px;
+      width: 1500px;
+    }
+    .lg #canvas {
+      height: 700px;
+      width: 1500px;
+    }
+    #img {
+      background: rgba(0,0,0,.6) url(../bb/img/campus1.jpg) no-repeat center;
+      background-size: cover;
+      cursor: pointer;
+      height: 33.33%;
+      width: 100%;
+      flex-shrink: 0;
+    }
+    #type {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-transform: uppercase;
+      padding: 30px;
+      position: relative;
+      flex-grow: 1;
+    }
+    #logo {
+      position: absolute;
+      top: 20px;
+      right: 0;
+      width: 90px;
+      height: 61px;
+    }
+    #type * {outline: none;}
+    #typeSm {
+      color: #f9c634;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      line-height: 1;
+      margin-bottom:1em;
+      z-index: 10;
+      -webkit-font-smoothing: antialiased;
+    }
+    #typeLg {
+      color: #fff;
+      font-family: 'Standard CT';
+      font-size: 90px;
+      font-weight: normal;
+      line-height: .85;
+    }
+    .sm #type {
+      padding: 60px;
+    }
+    .sm #typeLg {
+      font-size: 110px;
+    }
+
+    /* nav */
+    #nav {
+      background: #333;
+      /* display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; */
+      line-height: 1;
+      /* padding: 1rem; */
+      /* position: fixed; */
+      text-align: center;
+      flex: 0 0 auto;
+      /* top: 0; */
+      width: 300px;
+    }
+    .nav-inner {
+        position: sticky;
+        top: 0;
+    }
+    .swatch {
+      display: inline-block;
+      margin: 0 5px;
+      border-radius: 50px;
+      width: 30px;
+      height: 30px;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 2px #fff;
+    }
+    .swatch#colors-1 {background: #801328;}
+    .swatch#colors-2 {background: #27575a;}
+    .swatch#colors-3 {background: #118acb;}
+    .swatch#colors-4 {background: #F04F3E;}
+    .swatch#colors-5 {background: #bde3dc;}
+
+    .colors-1 #colors-1,
+    .colors-2 #colors-2,
+    .colors-3 #colors-3,
+    .colors-4 #colors-4,
+    .colors-5 #colors-5 {box-shadow: 0 0 0 2px var(--redOrange);}
+
+    .layout-icon {
+      background: #fff;
+      border:2px solid transparent;
+      border-radius: 5px;
+      padding: 3px;
+      margin: 5px;
+    }
+
+    .icon-wrap {
+      background: --var(maroon);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 56px;
+      height: 100px;
+    }
+    .icon-wrap .thumb {
+      background-color: rgba(0,0,0,.65);
+      background-size: cover;
+      width: 100%;
+      height: 50%;
+    }
+    .icon-wrap b {
+        width: 50%;
+        border-top: 2px solid #fff;
+        border-bottom: 2px solid #fff;
+        margin: 20px 0;
+        opacity: .3;
+        height: 10px;
+    }
+    .colors-1 .icon-wrap {background: var(--maroon);}
+
+    .layout-1 #layout-1,
+    .layout-2 #layout-2,
+    .layout-3 #layout-3,
+    .layout-4 #layout-4,
+    .layout-5 #layout-5 {border-color: var(--redOrange);}
+
+    /* color schemes */
+    .colors-1 #canvas,
+    .colors-1 .icon-wrap {background-color: #801328;}
+    .colors-1 #typeSm {color: #f9c634;}
+    .colors-1 #typeLg {color: #fff;}
+
+    .colors-2 #canvas,
+    .colors-2 .icon-wrap {background-color: #27575a;}
+    .colors-2 #typeSm {color: #bde3dc;}
+    .colors-2 #typeLg {color: #fff;}
+
+    .colors-3 #canvas,
+    .colors-3 .icon-wrap {background-color: #118acb;}
+    .colors-3 #typeSm {color: #004761;}
+    .colors-3 #typeLg {color: #fff;}
+
+    .colors-4 #canvas,
+    .colors-4 .icon-wrap {background-color: #F04F3E;}
+    .colors-4 #typeSm {color: #801328;}
+    .colors-4 #typeLg {color: #fff;}
+
+    .colors-5 #canvas,
+    .colors-5 .icon-wrap {background-color: #bde3dc;}
+    .colors-5 #typeSm {color: #f04e3e;}
+    .colors-5 #typeLg {color: #27575a;}
+
+    /* layouts */
+    .layout-1 #canvas {flex-direction: column;}
+    .layout-2 #img {height: 50%;}
+    .layout-3 #canvas {flex-direction: column-reverse;}
+    .layout-4 #canvas {flex-direction: column-reverse;}
+    .layout-4 #img {height: 50%;}
+    .layout-5 #img {display: none;}
+    .layout-3 #type,
+    .layout-4 #type,
+    .layout-5 #type {padding-top:100px;}
+    .layout-2 #typeLg,
+    .layout-4 #typeLg {font-size: 70px;}
+
+    .content {
+        display: flex;
+        flex-direction: row;
+        min-height: 100vh;
+    }
+    .phone {
+        border-radius: 50px;
+        padding: 60px 15px 80px;
+        background: #fff;
+        box-shadow: 0 0 0 2px #ddd;
+    }
+    .viewport {
+        background: #f4f4f4;
+        /* width: 60%; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        flex: 1 1 auto;
+    }
+    .nav-panel {
+        padding: 30px 0;
+        border-bottom: 1px solid rgba(255,255,255,.2);
+    }
+  </style>
+</head>
+
+<body class="colors-1 layout-5">
+  <div class="content" >
+    <div id="nav">
+        <div class="nav-inner">
+
+            <div class="nav-panel">
+                <a href="javascript:void(0)" onclick="changeColors(this.id)" class="swatch" id="colors-1"></a>
+                <a href="javascript:void(0)" onclick="changeColors(this.id)" class="swatch" id="colors-2"></a>
+                <a href="javascript:void(0)" onclick="changeColors(this.id)" class="swatch" id="colors-3"></a>
+                <a href="javascript:void(0)" onclick="changeColors(this.id)" class="swatch" id="colors-4"></a>
+                <a href="javascript:void(0)" onclick="changeColors(this.id)" class="swatch" id="colors-5"></a>
+            </div>
+
+
+            <div class="nav-panel" style="display: flex; flex-wrap: wrap; justify-content: center;">
+                <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-5">
+                    <div class="icon-wrap" style="justify-content: flex-end;">
+                        <b></b>
+                        <span class="thumb" style="height:0px;"></span>
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-1">
+                    <div class="icon-wrap">
+                        <span class="thumb" style="height:33%;"></span>
+                        <b></b>
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-2">
+                    <div class="icon-wrap">
+                        <span class="thumb" style="height:50%;"></span>
+                        <b></b>
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-3">
+                    <div class="icon-wrap" style="justify-content: flex-end;">
+                        <b></b>
+                        <span class="thumb" style="height:33%;"></span>
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="changeLayout(this.id)" class="layout-icon" id="layout-4">
+                    <div class="icon-wrap" style="justify-content: flex-end;">
+                        <b></b>
+                        <span class="thumb" style="height:50;"></span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="nav-panel">
+                <input type="file" id="photoUpload">
+            </div>
+
+            <div class="nav-panel">
+                <a href="javascript:void(0)" id="save">Download image &darr;</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="viewport">
+        <div class="phone">
+            <div id="canvas">
+                <img id="logo" src="../bb/oc-logo-symbol.png" width="90" height="61" />
+                <div id="img" onclick="changeImg()"></div>
+                <div id="type">
+                    <div id="typeSm" contenteditable="true" spellcheck="false">Click here to type</div>
+                    <div id="typeLg" contenteditable="true" spellcheck="false">Click here to type</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+function maxLength() {
+
+}
+
+// Change colors
+function changeColors(color) {
+  console.log(color);
+  document.body.classList.remove('colors-1','colors-2','colors-3','colors-4','colors-5','colors-6');
+  document.body.classList.add(color);
+}
+
+// Change layout
+function changeLayout(layout) {
+  console.log(layout);
+  document.body.classList.remove('layout-1','layout-2','layout-3','layout-4','layout-5');
+  document.body.classList.add(layout);
+}
+
+// Change size
+function changeSize(size) {
+  const canvas = document.getElementById('canvas');
+  console.log(size);
+  document.body.classList.remove('sm','md','lg');
+  document.body.classList.add(size);
+
+  // if (size == 's') {
+  //   canvas.style.height = '400px';
+  //   canvas.style.width = '1200px';
+  // } else if (size == 'l') {
+  //   canvas.style.height = '700px';
+  //   canvas.style.width = '1400px';
+  // } else {
+  //   canvas.style.height = '500px';
+  //   canvas.style.width = '1500px';
+  // }
+}
+
+// Images
+const images = [
+  '../bb/img/art1.jpg',
+  '../bb/img/art2.jpg',
+  '../bb/img/art3.jpg',
+  '../bb/img/art4.jpg',
+  '../bb/img/bible1.jpg',
+  '../bb/img/biology1.jpg',
+  '../bb/img/biology2.jpg',
+  '../bb/img/business1.jpg',
+  '../bb/img/business2.jpg',
+  '../bb/img/campus1.jpg',
+  '../bb/img/campus2.jpg',
+  '../bb/img/campus3.jpg',
+  '../bb/img/campus4.jpg',
+  '../bb/img/campus5.jpg',
+  '../bb/img/campus6.jpg',
+  '../bb/img/computer1.jpg',
+  '../bb/img/computer2.jpg',
+  '../bb/img/computer3.jpg',
+  '../bb/img/computer4.jpg',
+  '../bb/img/education1.jpg',
+  '../bb/img/engineering1.jpg',
+  '../bb/img/engineering2.jpg',
+  '../bb/img/engineering3.jpg',
+  '../bb/img/engineering4.jpg',
+  '../bb/img/engineering5.jpg',
+  '../bb/img/engineering6.jpg',
+  '../bb/img/engineering7.jpg',
+  '../bb/img/engineering8.jpg',
+  '../bb/img/english1.jpg',
+  '../bb/img/english2.jpg',
+  '../bb/img/gaming2.jpg',
+  '../bb/img/gaming3.jpg',
+  '../bb/img/gaming4.jpg',
+  '../bb/img/gaming5.jpg',
+  '../bb/img/graduation1.jpg',
+  '../bb/img/ike1.jpg',
+  '../bb/img/ike2.jpg',
+  '../bb/img/interiordesign1.jpg',
+  '../bb/img/math1.jpg',
+  '../bb/img/media1.jpg',
+  '../bb/img/music1.jpg',
+  '../bb/img/music2.jpg',
+  '../bb/img/nursing1.jpg',
+  '../bb/img/nursing2.jpg',
+  '../bb/img/nursing3.jpg',
+  '../bb/img/science1.jpg',
+  '../bb/img/science2.jpg',
+  '../bb/img/science3.jpg',
+  '../bb/img/science4.jpg',
+  '../bb/img/studyabroad1.jpg',
+  '../bb/img/studyabroad2.jpg',
+  '../bb/img/studyabroad3.jpg'
+];
+
+function random(max) {
+  return Math.floor(Math.random() * max);
+}
+
+const img = document.getElementById('img');
+const thumbs = document.getElementsByClassName('thumb');
+
+function changeImg() {
+  var rand = random(images.length)
+  // img.setAttribute('style', 'background-image: url('+images[rand]+')');
+  img.style.backgroundImage = 'url('+images[rand]+')';
+
+  console.log(images[rand]);
+  changeThumbs(images[rand])
+}
+
+function changeThumbs(url) {
+    var i;
+    for (i = 0; i < thumbs.length; i++) {
+        thumbs[i].style.backgroundImage = 'url('+url+')';
+    }
+}
+
+changeImg();
+
+$("#save").click(function() {
+  html2canvas($("#canvas")[0], {
+      scale: 3 // this affects resolution
+    }).then(function (canvas) {
+    console.log('rendered');
+    saveAs(canvas.toDataURL(), 'image.png');
+  });
+});
+
+function saveAs(uri, filename) {
+  console.log('saving');
+
+  var link = document.createElement('a');
+  if (typeof link.download === 'string') {
+    link.href = uri;
+    link.download = filename;
+
+    //Firefox requires the link to be in the body
+    document.body.appendChild(link);
+
+    //simulate click
+    link.click();
+
+    //remove the link when done
+    document.body.removeChild(link);
+  } else {
+    window.open(uri);
+  }
+}
+
+
+// render the image in our view
+function renderImage(file) {
+
+    // generate a new FileReader object
+    var reader = new FileReader();
+
+    // inject an image with the src url
+    reader.onload = function(event) {
+        the_url = event.target.result
+        img.style.backgroundImage = 'url('+the_url+')';
+        changeThumbs(the_url);
+    }
+
+    // when the file is read it triggers the onload event above.
+    reader.readAsDataURL(file);
+    if(document.body.classList.contains('layout-5')) {
+        changeLayout('layout-1');
+    }
+}
+
+// handle input changes
+$("#photoUpload").change(function() {
+  console.log(this.files)
+
+  // grab the first image in the FileList object and pass it to the function
+  renderImage(this.files[0])
+});
+</script>
+
+</body>
+</html>

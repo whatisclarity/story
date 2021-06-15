@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Story Maker</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/nyp5qmz.css">
+    <link href="app.css" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3.1.1/dist/vue.global.prod.js"></script>
+    <script src="html2canvas.min.js"></script>
+</head>
+<body>
+    
+<div id="app" class="flex flex-row-reverse min-h-screen">
+
+    <!-- <div class="fixed top-0 left-0 bg-royal h-2 transform transition-all" :style="{width: progress + '%'}"></div> -->
+
+    <div id="tools" class="bg-gray p-8 pb-36 w-1/4">
+        <div class="sticky top-8">
+            <label for="smallText" class="uppercase text-sm text-white tracking-widest mb-1 block">Small Text</label>
+            <input id="smallText" class="block w-full rounded-sm p-3 mb-4" maxlength="50" v-model="smallText" @focus.once="smallText = ''" />
+
+            <label for="largeText" class="uppercase text-sm text-white tracking-widest mb-1 block">Large Text</label>
+            <textarea id="largeText" class="block w-full rounded-sm p-3 mb-8" maxlength="85" rows="3" v-model="largeText" @focus.once="largeText = ''"></textarea>
+
+            <!-- color schemes -->
+            <h2 class="uppercase text-sm text-white tracking-widest mb-1">Color Scheme</h2>
+            <div class="flex flex-wrap -m-1 mb-8">
+                <a href="#" @click.prevent="scheme = 'scheme-1'" class="bg-maroon w-10 h-10 rounded-full border-4 border-white m-1"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-2'" class="bg-teal w-10 h-10 rounded-full border-4 border-white m-1"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-3'" class="bg-royal w-10 h-10 rounded-full border-4 border-white m-1"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-4'" class="bg-redOrange w-10 h-10 rounded-full border-4 border-white m-1"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-5'" class="bg-sky w-10 h-10 rounded-full border-4 border-white m-1"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-6'" class="bg-marigold w-10 h-10 rounded-full border-4 border-white m-1"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-7'" class="bg-storm w-10 h-10 rounded-full border-4 border-white m-1"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-8'" class="bg-dark-maroon w-10 h-10 rounded-full border-4 border-white m-1"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-9'" class="bg-silver w-10 h-10 rounded-full border-4 border-white m-1"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-10'" class="bg-cream w-10 h-10 rounded-full border-4 border-white m-1"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-11'" class="bg-salmon w-10 h-10 rounded-full border-4 border-white m-1"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-12'" class="bg-navy w-10 h-10 rounded-full border-4 border-white m-1"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-13'" class="bg-ethos w-10 h-10 rounded-full border-4 border-white m-1"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-14'" class="bg-white w-10 h-10 rounded-full border-4 border-white m-1"></a>
+            </div>
+            <!-- color schemes -->
+
+            <!-- layouts -->
+            <h2 class="uppercase text-sm text-white tracking-widest mb-1">Layout</h2>
+            <div class="flex flex-wrap -m-1 mb-8">
+                <a href="#" @click.prevent="layout = 'layout-1'">
+                    <div class="thumb flex flex-col layout-1 border-4 border-white rounded-md m-1" :class="scheme">
+                        <div class="text flex-1 flex text-white items-center justify-center">
+                            <div class="border-t border-b border-white h-2 w-2/3 opacity-50"></div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" @click.prevent="layout = 'layout-3'">
+                    <div class="thumb flex flex-col layout-3 border-4 border-white rounded-md m-1" :class="scheme">
+                        <div class="img bg-black bg-opacity-50">
+                            <img v-if="img" :src="img" class="object-cover w-full h-full" />
+                        </div>
+                        <div class="text flex-1 flex text-white items-center justify-center">
+                            <div class="border-t border-b border-white h-2 w-2/3 opacity-50"></div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" @click.prevent="layout = 'layout-2'">
+                    <div class="thumb flex flex-col layout-2 border-4 border-white rounded-md m-1" :class="scheme">
+                        <div class="img bg-black bg-opacity-50">
+                            <img v-if="img" :src="img" class="object-cover w-full h-full" />
+                        </div>
+                        <div class="text flex-1 flex text-white items-center justify-center">
+                            <div class="border-t border-b border-white h-2 w-2/3 opacity-50"></div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" @click.prevent="layout = 'layout-3 reverse'">
+                    <div class="thumb flex flex-col layout-3 flex-col-reverse border-4 border-white rounded-md m-1" :class="scheme">
+                        <div class="img bg-black bg-opacity-50">
+                            <img v-if="img" :src="img" class="object-cover w-full h-full" />
+                        </div>
+                        <div class="text flex-1 flex text-white items-center justify-center">
+                            <div class="border-t border-b border-white h-2 w-2/3 opacity-50"></div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" @click.prevent="layout = 'layout-2 reverse'">
+                    <div class="thumb flex flex-col layout-2 flex-col-reverse border-4 border-white rounded-md m-1" :class="scheme">
+                        <div class="img bg-black bg-opacity-50">
+                            <img v-if="img" :src="img" class="object-cover w-full h-full" />
+                        </div>
+                        <div class="text flex-1 flex text-white items-center justify-center">
+                            <div class="border-t border-b border-white h-2 w-2/3 opacity-50"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- /layouts -->
+
+            <!-- image upload -->
+            <label for="imgUpload" class="uppercase text-sm text-white tracking-widest mb-1 block border-2 leading-none p-6 text-center cursor-pointer">&plus; Upload <span v-if="img">a different</span><span v-else>an</span> Image</label>
+            <input id="imgUpload" type="file" accept="image/*" class="hidden" @change=uploadImage>
+            <!-- /image upload -->
+
+            <div class="fixed bottom-0 right-0 p-8 w-1/4 bg-gray border-t border-opacity-20 border-white">
+                <a href="#" @click.prevent="toCanvas" class="uppercase text-sm text-white tracking-widest mb-1 block bg-royal leading-none p-6 text-center cursor-pointer">&darr; Download it! </a>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="viewport" class="bg-gray-100 p-8 flex-1 flex items-center justify-center">
+        <div class="rounded-4xl bg-white px-4 pt-14 py-20 inline-block border-2">
+            <div class="border">
+                <div id="canvas" class="flex flex-col relative" :class="scheme, layout">
+                    <img v-if="scheme === 'scheme-9' || scheme === 'scheme-10' || scheme === 'scheme-14'" src="oc-logo-maroon.png" class="absolute top-4 right-0 z-10" width="90" height="61" />
+                    <img v-else src="oc-logo-white.png" class="absolute top-4 right-0 z-10" width="90" height="61" />
+
+                    <div class="img bg-cover bg-center" :style="{ backgroundImage: 'url(' + img + ')' }">
+                        <!-- <img v-if="img" :src="img" class="object-cover w-full h-full" /> -->
+                    </div>
+
+                    <div class="text p-8 flex-1 flex flex-col justify-center">
+                        <h4 class="text-marigold uppercase text-sm tracking-widest mb-2">
+                            {{ smallText }}
+                        </h4>
+                        <h1 class="text-white condensed uppercase font-normal tracking-wide whitespace-pre-line">{{ largeText }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+const app = {
+  data() {
+    return {
+        // smallText: 'Do you want to add a heading?',
+        // largeText: 'It doesn\'t have to be a heading...',
+        // smallText: 'No more rhyming now - I mean it!',
+        // largeText: 'Anybody want a peanut?',
+        smallText: 'Did you get pears?',
+        largeText: 'We\'ll discuss it inside.',
+        // smallText: 'Why do they call it Ovaltine?',
+        // largeText: 'The mug is round. The jar is round. They should call it Roundtine.',
+        scheme: 'scheme-1',
+        layout: 'layout-3',
+        img: 'img/ike1.jpg',
+    }
+  }, methods: {
+    uploadImage(e){
+        const image = e.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onload = e =>{
+            this.img = e.target.result;
+            this.layout = (this.layout === 'layout-1') ? 'layout-3' : this.layout;            
+        };
+    },
+    toCanvas() {
+        let _this = this;
+        html2canvas(document.querySelector("#canvas"), {
+            scale: 3 // this affects resolution
+        }).then(function (canvas) {
+            _this.saveAs(canvas.toDataURL(), 'image.png');
+        });
+    },
+    saveAs(uri, filename) {
+        var link = document.createElement('a');
+        if (typeof link.download === 'string') {
+            link.href = uri;
+            link.download = filename;
+            //Firefox requires the link to be in the body
+            document.body.appendChild(link);
+            //simulate click
+            link.click();
+            //remove the link when done
+            document.body.removeChild(link);
+        } else {
+            window.open(uri);
+        }
+    }
+  }
+}
+
+Vue.createApp(app).mount('#app')
+
+</script>
+
+</body>
+</html>
