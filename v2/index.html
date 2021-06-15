@@ -99,12 +99,12 @@
             <!-- /layouts -->
 
             <!-- image upload -->
-            <label for="imgUpload" class="uppercase text-sm text-white tracking-widest mb-1 block border-2 leading-none p-6 text-center cursor-pointer">&plus; Upload <span v-if="img">a different</span><span v-else>an</span> Image</label>
+            <label for="imgUpload" class="uppercase text-sm text-white tracking-widest mb-1 block border-2  p-6 text-center cursor-pointer">&plus; Upload <span v-if="img">a different</span><span v-else>an</span> Image</label>
             <input id="imgUpload" type="file" accept="image/*" class="hidden" @change=uploadImage>
             <!-- /image upload -->
 
             <div class="fixed bottom-0 right-0 p-8 w-1/4 bg-gray border-t border-opacity-20 border-white">
-                <a href="#" @click.prevent="toCanvas" class="uppercase text-sm text-white tracking-widest mb-1 block bg-royal leading-none p-6 text-center cursor-pointer">&darr; Download it! </a>
+                <a href="#" @click.prevent="toCanvas" class="uppercase text-sm text-white tracking-widest mb-1 block bg-royal  p-6 text-center cursor-pointer">&darr; Download it! </a>
             </div>
 
         </div>
