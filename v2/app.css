@@ -33,9 +33,9 @@
     width: 375px;
     height: 667px;
 }
-/* #canvas * {
+#canvas * {
     transition: all .15s ease-out;
-} */
+}
 .thumb {
     width: 56px;
     height: 100px;
