@@ -7,7 +7,7 @@
     <title>Instagram Story Maker</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://use.typekit.net/nyp5qmz.css" rel="stylesheet" crossorigin="anonymous">
-    <link href="app.css?v=1.13" rel="stylesheet">
+    <link href="app.css?v=1.14" rel="stylesheet">
     <script src="https://unpkg.com/vue@3.1.1/dist/vue.global.prod.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" crossorigin="anonymous"></script>
 </head>
@@ -28,20 +28,20 @@
             <!-- color schemes -->
             <h2 class="uppercase text-sm text-white tracking-widest mb-1">Color Scheme</h2>
             <div class="flex flex-wrap -m-1 mb-8">
-                <a href="#" @click.prevent="scheme = 'scheme-1'" class="bg-maroon w-10 h-10 rounded-full border-4 border-white m-1"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-2'" class="bg-teal w-10 h-10 rounded-full border-4 border-white m-1"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-3'" class="bg-royal w-10 h-10 rounded-full border-4 border-white m-1"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-4'" class="bg-redOrange w-10 h-10 rounded-full border-4 border-white m-1"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-5'" class="bg-sky w-10 h-10 rounded-full border-4 border-white m-1"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-6'" class="bg-marigold w-10 h-10 rounded-full border-4 border-white m-1"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-7'" class="bg-storm w-10 h-10 rounded-full border-4 border-white m-1"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-8'" class="bg-dark-maroon w-10 h-10 rounded-full border-4 border-white m-1"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-9'" class="bg-silver w-10 h-10 rounded-full border-4 border-white m-1"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-10'" class="bg-cream w-10 h-10 rounded-full border-4 border-white m-1"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-11'" class="bg-salmon w-10 h-10 rounded-full border-4 border-white m-1"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-12'" class="bg-navy w-10 h-10 rounded-full border-4 border-white m-1"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-13'" class="bg-ethos w-10 h-10 rounded-full border-4 border-white m-1"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-14'" class="bg-white w-10 h-10 rounded-full border-4 border-white m-1"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-1'" class="bg-maroon w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-1' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-2'" class="bg-teal w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-2' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-3'" class="bg-royal w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-3' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-4'" class="bg-redOrange w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-4' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-5'" class="bg-sky w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-5' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-6'" class="bg-marigold w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-6' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-7'" class="bg-storm w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-7' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-8'" class="bg-dark-maroon w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-8' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-9'" class="bg-silver w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-9' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-10'" class="bg-cream w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-10' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-11'" class="bg-salmon w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-11' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-12'" class="bg-navy w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-12' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-13'" class="bg-ethos w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-13' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-14'" class="bg-white w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-14' ? 'active' : ''"></a>
             </div>
             <!-- color schemes -->
 
@@ -49,14 +49,14 @@
             <h2 class="uppercase text-sm text-white tracking-widest mb-1">Layout</h2>
             <div class="flex flex-wrap -m-1 mb-8">
                 <a href="#" @click.prevent="layout = 'layout-1'">
-                    <div class="thumb flex flex-col layout-1 border-4 border-white rounded-md m-1" :class="scheme">
+                    <div class="thumb flex flex-col layout-1 border-4 border-white rounded-md m-1" :class="[scheme, layout === 'layout-1' ? 'active' : '']">
                         <div class="text flex-1 flex text-white items-center justify-center">
                             <div class="border-t border-b border-white h-2 w-2/3 opacity-50"></div>
                         </div>
                     </div>
                 </a>
                 <a href="#" @click.prevent="layout = 'layout-4'">
-                    <div class="thumb flex flex-col layout-4 border-4 border-white rounded-md m-1" :class="scheme">
+                    <div class="thumb flex flex-col layout-4 border-4 border-white rounded-md m-1" :class="[scheme, layout === 'layout-4' ? 'active' : '']">
                         <div class="img bg-black bg-opacity-50">
                             <img v-if="img" :src="img" class="object-cover w-full h-full" />
                         </div>
@@ -66,7 +66,7 @@
                     </div>
                 </a>
                 <a href="#" @click.prevent="layout = 'layout-3'">
-                    <div class="thumb flex flex-col layout-3 border-4 border-white rounded-md m-1" :class="scheme">
+                    <div class="thumb flex flex-col layout-3 border-4 border-white rounded-md m-1" :class="[scheme, layout === 'layout-3' ? 'active' : '']">
                         <div class="img bg-black bg-opacity-50">
                             <img v-if="img" :src="img" class="object-cover w-full h-full" />
                         </div>
@@ -76,7 +76,7 @@
                     </div>
                 </a>
                 <a href="#" @click.prevent="layout = 'layout-2'">
-                    <div class="thumb flex flex-col layout-2 border-4 border-white rounded-md m-1" :class="scheme">
+                    <div class="thumb flex flex-col layout-2 border-4 border-white rounded-md m-1" :class="[scheme, layout === 'layout-2' ? 'active' : '']">
                         <div class="img bg-black bg-opacity-50">
                             <img v-if="img" :src="img" class="object-cover w-full h-full" />
                         </div>
@@ -86,7 +86,7 @@
                     </div>
                 </a>
                 <a href="#" @click.prevent="layout = 'layout-4 reverse'">
-                    <div class="thumb flex flex-col layout-4 flex-col-reverse border-4 border-white rounded-md m-1" :class="scheme">
+                    <div class="thumb flex flex-col layout-4 flex-col-reverse border-4 border-white rounded-md m-1" :class="[scheme, layout === 'layout-4 reverse' ? 'active' : '']">
                         <div class="img bg-black bg-opacity-50">
                             <img v-if="img" :src="img" class="object-cover w-full h-full" />
                         </div>
@@ -96,7 +96,7 @@
                     </div>
                 </a>
                 <a href="#" @click.prevent="layout = 'layout-3 reverse'">
-                    <div class="thumb flex flex-col layout-3 flex-col-reverse border-4 border-white rounded-md m-1" :class="scheme">
+                    <div class="thumb flex flex-col layout-3 flex-col-reverse border-4 border-white rounded-md m-1" :class="[scheme, layout === 'layout-3 reverse' ? 'active' : '']">
                         <div class="img bg-black bg-opacity-50">
                             <img v-if="img" :src="img" class="object-cover w-full h-full" />
                         </div>
@@ -106,7 +106,7 @@
                     </div>
                 </a>
                 <a href="#" @click.prevent="layout = 'layout-2 reverse'">
-                    <div class="thumb flex flex-col layout-2 flex-col-reverse border-4 border-white rounded-md m-1" :class="scheme">
+                    <div class="thumb flex flex-col layout-2 flex-col-reverse border-4 border-white rounded-md m-1" :class="[scheme, layout === 'layout-2 reverse' ? 'active' : '']">
                         <div class="img bg-black bg-opacity-50">
                             <img v-if="img" :src="img" class="object-cover w-full h-full" />
                         </div>
@@ -134,10 +134,9 @@
         <div class="rounded-4xl bg-white px-4 pt-14 py-20 inline-block border-2">
             <div class="border">
                 <div id="canvas" class="flex flex-col relative" :class="scheme, layout">
-                    <img v-if="scheme === 'scheme-9' || scheme === 'scheme-10' || scheme === 'scheme-14'" src="oc-logo-maroon.png" class="logo absolute top-4 right-0 z-10" width="90" height="61" />
-                    <img v-else src="oc-logo-white.png" class="logo absolute top-4 right-0 z-10" width="90" height="61" />
+                    <img :src="(scheme === 'scheme-9' || scheme === 'scheme-10' || scheme === 'scheme-14') ? 'logo-maroon.svg' : 'logo.svg'" class="logo absolute right-0 z-10" width="100" />
 
-                    <div class="img overflow-hidden relative">
+                    <div class="img overflow-hidden relative cursor-pointer" @click.prevent="shuffleImages">
                         <div class="bg-cover bg-center -inset-1 absolute" :style="{ backgroundImage: 'url(' + img + ')' }"></div>
                     </div>
 
@@ -157,52 +156,116 @@
 <script>
 
 const app = {
-  data() {
-    return {
-        // smallText: 'Do you want to add a heading?',
-        // largeText: 'It doesn\'t have to be a heading...',
-        // smallText: 'No more rhyming now - I mean it!',
-        // largeText: 'Anybody want a peanut?',
-        smallText: 'Did you get pears?',
-        largeText: 'We\'ll discuss it inside.',
-        // smallText: 'Why do they call it Ovaltine?',
-        // largeText: 'The mug is round. The jar is round. They should call it Roundtine.',
-        scheme: 'scheme-1',
-        layout: 'layout-1',
-        img: 'img/ike.jpg',
-    }
-  }, methods: {
-    uploadImage(e){
-        const image = e.target.files[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(image);
-        reader.onload = e =>{
-            this.img = e.target.result;
-            this.layout = (this.layout === 'layout-1') ? 'layout-3' : this.layout;            
-        };
+    data() {
+        return {
+            // smallText: 'Do you want to add a heading?',
+            // largeText: 'It doesn\'t have to be a heading...',
+            // smallText: 'No more rhyming now. I mean it!',
+            // largeText: 'Anybody want a peanut?',
+            smallText: 'Did you get pears?',
+            largeText: 'We\'ll discuss it inside.',
+            // smallText: 'Why do they call it Ovaltine?',
+            // largeText: 'The mug is round. The jar is round. They should call it Roundtine.',
+            scheme: 'scheme-1',
+            layout: 'layout-1',
+            images: [
+                'img/art1.jpg',
+                'img/art2.jpg',
+                'img/art3.jpg',
+                'img/art4.jpg',
+                'img/bible1.jpg',
+                'img/biology1.jpg',
+                'img/biology2.jpg',
+                'img/business1.jpg',
+                'img/business2.jpg',
+                'img/campus1.jpg',
+                'img/campus2.jpg',
+                'img/campus3.jpg',
+                'img/campus4.jpg',
+                'img/campus5.jpg',
+                'img/campus6.jpg',
+                'img/computer1.jpg',
+                'img/computer2.jpg',
+                'img/computer3.jpg',
+                'img/computer4.jpg',
+                'img/education1.jpg',
+                'img/engineering1.jpg',
+                'img/engineering2.jpg',
+                'img/engineering3.jpg',
+                'img/engineering4.jpg',
+                'img/engineering5.jpg',
+                'img/engineering6.jpg',
+                'img/engineering7.jpg',
+                'img/engineering8.jpg',
+                'img/english1.jpg',
+                'img/english2.jpg',
+                'img/gaming2.jpg',
+                'img/gaming3.jpg',
+                'img/gaming4.jpg',
+                'img/gaming5.jpg',
+                'img/graduation1.jpg',
+                'img/ike.jpg',
+                'img/ike2.jpg',
+                'img/interiordesign1.jpg',
+                'img/math1.jpg',
+                'img/media1.jpg',
+                'img/music1.jpg',
+                'img/music2.jpg',
+                'img/nursing1.jpg',
+                'img/nursing2.jpg',
+                'img/nursing3.jpg',
+                'img/science1.jpg',
+                'img/science2.jpg',
+                'img/science3.jpg',
+                'img/science4.jpg',
+                'img/studyabroad1.jpg',
+                'img/studyabroad2.jpg',
+                'img/studyabroad3.jpg'
+            ],
+            img: 'img/engineering5.jpg'
+        }
     },
-    save() {
-        const scale = 3;
-        const canvas = document.getElementById('canvas');
-        domtoimage.toPng(canvas, {
-            quality: 1,
-            width: canvas.clientWidth * scale,
-            height: canvas.clientHeight * scale,
-            style: {
-                transform: "scale(" + scale + ")",
-                transformOrigin: "top left",
-                width: canvas.offsetWidth + "px",
-                height: canvas.offsetHeight + "px"
-            }
-        })
-        .then(function (dataUrl) {
-            var link = document.createElement('a');
-            link.download = 'story.png';
-            link.href = dataUrl;
-            link.click();
-        });
+    methods: {
+        uploadImage(e){
+            const image = e.target.files[0];
+            const reader = new FileReader();
+            reader.readAsDataURL(image);
+            reader.onload = e =>{
+                this.img = e.target.result;
+                this.layout = (this.layout === 'layout-1') ? 'layout-3' : this.layout;            
+            };
+        },
+        shuffleImages(){
+            const total = this.images.length;
+            const random = Math.floor(Math.random() * total);
+            console.log(this.images[random]);
+            this.img = this.images[random];
+        },
+        save() {
+            const scale = 3;
+            const canvas = document.getElementById('canvas');
+            domtoimage.toPng(canvas, {
+                quality: 1,
+                width: canvas.clientWidth * scale,
+                height: canvas.clientHeight * scale,
+                style: {
+                    transform: "scale(" + scale + ")",
+                    transformOrigin: "top left",
+                    width: canvas.offsetWidth + "px",
+                    height: canvas.offsetHeight + "px"
+                }
+            })
+            .then(function (dataUrl) {
+                var link = document.createElement('a');
+                link.download = 'story.png';
+                link.href = dataUrl;
+                link.click();
+            });
+        }
+    },
+    mounted() {
+        this.shuffleImages();
     }
-  }
 }
 
 Vue.createApp(app).mount('#app')
