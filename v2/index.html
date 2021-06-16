@@ -137,8 +137,8 @@
                     <img v-if="scheme === 'scheme-9' || scheme === 'scheme-10' || scheme === 'scheme-14'" src="oc-logo-maroon.png" class="logo absolute top-4 right-0 z-10" width="90" height="61" />
                     <img v-else src="oc-logo-white.png" class="logo absolute top-4 right-0 z-10" width="90" height="61" />
 
-                    <div class="img bg-cover bg-center" :style="{ backgroundImage: 'url(' + img + ')' }">
-                        <!-- <img v-if="img" :src="img" class="object-cover w-full h-full" /> -->
+                    <div class="img overflow-hidden relative">
+                        <div class="bg-cover bg-center -inset-1 absolute" :style="{ backgroundImage: 'url(' + img + ')' }"></div>
                     </div>
 
                     <div class="text p-8 flex-1 flex flex-col justify-center">
@@ -155,6 +155,7 @@
 </div>
 
 <script>
+window.devicePixelRatio = 2;
 
 const app = {
   data() {
@@ -169,7 +170,7 @@ const app = {
         // largeText: 'The mug is round. The jar is round. They should call it Roundtine.',
         scheme: 'scheme-1',
         layout: 'layout-1',
-        img: 'img/ike1.jpg',
+        img: 'img/ike.jpg',
     }
   }, methods: {
     uploadImage(e){
@@ -186,7 +187,7 @@ const app = {
         html2canvas(document.querySelector("#canvas"), {
             scale: 3 // this affects resolution
         }).then(function (canvas) {
-            _this.saveAs(canvas.toDataURL(), 'image.png');
+            _this.saveAs(canvas.toDataURL("image/png", 1), 'image.png');
         });
     },
     saveAs(uri, filename) {
