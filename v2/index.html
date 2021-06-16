@@ -141,7 +141,7 @@
                     </div>
 
                     <div class="text p-8 flex-1 flex flex-col justify-center">
-                        <h4 class="text-marigold uppercase text-sm tracking-widest mb-2">
+                        <h4 class="text-marigold uppercase text-sm tracking-widest" :class="(largeText !== '') ? 'mb-2' : ''">
                             {{ smallText }}
                         </h4>
                         <h1 class="text-white condensed uppercase font-normal tracking-wide whitespace-pre-line">{{ largeText }}</h1>
