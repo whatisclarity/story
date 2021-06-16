@@ -150,7 +150,8 @@ h1 {
 .layout-1 .img {
   height: 0;
 }
-.layout-1 h1 {
+.layout-1 h1,
+.layout-5 h1 {
   font-size: 3.75rem;
 }
 
@@ -173,6 +174,20 @@ h1 {
 .layout-4 .text {
   height: auto;
   flex-grow: 0;
+}
+
+/* layout-5 - text over image */
+.layout-5 .img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0.25;
+  filter: grayscale();
+}
+.layout-5 .text > * {
+  z-index: 100;
 }
 
 /* reverse text and image */

@@ -7,7 +7,7 @@
     <title>Instagram Story Maker</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://use.typekit.net/nyp5qmz.css" rel="stylesheet" crossorigin="anonymous">
-    <link href="app.css?v=1.14" rel="stylesheet">
+    <link href="app.css?v=1.15" rel="stylesheet">
     <script src="https://unpkg.com/vue@3.1.1/dist/vue.global.prod.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" crossorigin="anonymous"></script>
 </head>
@@ -115,6 +115,16 @@
                         </div>
                     </div>
                 </a>
+                <a href="#" @click.prevent="layout = 'layout-5'">
+                    <div class="thumb flex flex-col layout-5 relative border-4 border-white rounded-md m-1" :class="[scheme, layout === 'layout-5' ? 'active' : '']">
+                        <div class="img bg-black bg-opacity-50">
+                            <img v-if="img" :src="img" class="object-cover w-full h-full" />
+                        </div>
+                        <div class="text flex-1 flex text-white items-center justify-center">
+                            <div class="border-t border-b border-white h-2 w-2/3 opacity-50"></div>
+                        </div>
+                    </div>
+                </a>
             </div>
             <!-- /layouts -->
 
@@ -167,7 +177,7 @@ const app = {
             // smallText: 'Why do they call it Ovaltine?',
             // largeText: 'The mug is round. The jar is round. They should call it Roundtine.',
             scheme: 'scheme-1',
-            layout: 'layout-1',
+            layout: 'layout-5',
             images: [
                 'img/art1.jpg',
                 'img/art2.jpg',
