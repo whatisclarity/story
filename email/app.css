@@ -1,15 +1,18 @@
 :root {
   --maroon: #801328;
-  --dark-maroon: #48111c;
+  /* --dark-maroon: #48111c; */
+  --dark-maroon: #41101a;
   --silver: #d5dfe7;
   --cream: #f4ecd0;
   --teal: #27575a;
-  --royal: #118acb;
+  /* --royal: #118acb; */
+  --royal: #1173b0;
   --redOrange: #f04e3e;
   --sky: #bde3dc;
   --marigold: #f9c634;
   --storm: #708e9a;
-  --salmon: #f68d76;
+  /* --salmon: #f68d76; */
+  --salmon: #fa8e79;
   --navy: #004761;
   --ethos: #5ec4b6;
 
@@ -38,8 +41,8 @@
   height: 400px;
   /* flex-direction: row; */
 }
-#canvas * {
-  transition: all 0.15s ease-out;
+#canvas *:not(.main-img) {
+  transition: all 0.125s ease-out;
 }
 .thumb {
   width: 109px;
@@ -47,6 +50,15 @@
 }
 .active {
   box-shadow: 0 0 0 2px var(--redOrange);
+}
+.btn:hover {
+  background: var(--redOrange);
+}
+.squared {
+  transition: all 0.125s ease-out;
+}
+.squared:hover {
+  border-radius: 0;
 }
 /* tailwind overrides */
 .tracking-widest {
@@ -174,7 +186,7 @@ h1 {
   font-size: 2.25rem;
 }
 #canvas.layout-3:not(.reverse) .text {
-  padding-top: 4.5rem;
+  /* padding-top: 4.5rem; */
 }
 .layout-3.text-long:not(.reverse) .text {
   justify-content: flex-end;
@@ -247,20 +259,23 @@ h1 {
 .scheme-3 {
   background-color: var(--royal);
 }
+.scheme-3 h4 {
+  color: #fff;
+}
 .scheme-4 {
   background-color: var(--redOrange);
 }
 .scheme-4 h4 {
-  color: var(--maroon);
+  color: var(--dark-maroon);
 }
 .scheme-5 {
   background-color: var(--sky);
 }
 .scheme-5 h4 {
-  color: var(--redOrange);
+  color: var(--teal);
 }
 .scheme-5 h1 {
-  color: var(--teal);
+  color: var(--maroon);
 }
 .thumb.scheme-5 .thumb-text {
   border-color: var(--teal);
@@ -269,7 +284,7 @@ h1 {
   background-color: var(--marigold);
 }
 .scheme-6 h4 {
-  color: white;
+  color: var(--maroon);
 }
 .scheme-6 h1 {
   color: var(--maroon);
@@ -285,7 +300,7 @@ h1 {
   background-color: var(--storm);
 }
 .scheme-7 h4 {
-  color: var(--maroon);
+  color: var(--dark-maroon);
 }
 .scheme-8 {
   background-color: var(--dark-maroon);
@@ -297,7 +312,7 @@ h1 {
   background-color: var(--silver);
 }
 .scheme-9 h4 {
-  color: var(--storm);
+  color: var(--teal);
 }
 .scheme-9 h1 {
   color: var(--maroon);
@@ -306,7 +321,7 @@ h1 {
   background-color: var(--cream);
 }
 .scheme-10 h4 {
-  color: var(--redOrange);
+  color: var(--teal);
 }
 .scheme-10 h1 {
   color: var(--maroon);
@@ -315,7 +330,7 @@ h1 {
   background-color: var(--salmon);
 }
 .scheme-11 h4 {
-  color: white;
+  color: var(--maroon);
 }
 .scheme-11 h1 {
   color: var(--maroon);
@@ -335,15 +350,12 @@ h1 {
 .scheme-13 h4 {
   color: var(--teal);
 }
-.scheme-14 h1 {
-  color: white;
-}
 .scheme-14 {
   background-color: white;
 }
 .scheme-14 h4 {
-  color: var(--redOrange);
+  color: var(--maroon);
 }
 .scheme-14 h1 {
-  color: var(--maroon);
+  color: var(--redOrange);
 }

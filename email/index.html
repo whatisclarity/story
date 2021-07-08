@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Story Maker</title>
+    <title>🧑‍🍳 Let's make a header!</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://use.typekit.net/nyp5qmz.css" rel="stylesheet" crossorigin="anonymous">
-    <link href="app.css?v=1.16" rel="stylesheet">
+    <link href="app.css?v=1.17" rel="stylesheet">
     <script src="https://unpkg.com/vue@3.1.1/dist/vue.global.prod.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" crossorigin="anonymous"></script>
 </head>
@@ -17,39 +17,40 @@
 
     <!-- <div class="fixed top-0 left-0 bg-royal h-2 transform transition-all" :style="{width: progress + '%'}"></div> -->
 
-    <div id="tools" class="bg-gray p-8 pb-36 w-1/4">
+    <div id="tools" class="bg-gray p-8 pb-44 w-1/3 xl:w-1/4">
         <div class="sticky top-8">
-            <label for="smallText" class="uppercase text-sm text-white tracking-widest mb-1 block">Small Text</label>
-            <input id="smallText" class="block w-full rounded-sm p-3 mb-4" maxlength="19" v-model="smallText" @focus.once="smallText = ''" />
+            <label for="smallText" class="uppercase text-sm text-white tracking-widest mb-3 block">Small Text</label>
+            <input id="smallText" class="block w-full rounded-sm p-3 mb-4" maxlength="19" v-model="smallText" @input="howLong()" />
 
-            <label for="largeText" class="uppercase text-sm text-white tracking-widest mb-1 block">Large Text</label>
-            <textarea id="largeText" class="block w-full rounded-sm p-3 mb-8" maxlength="27" rows="3" v-model="largeText" @focus.once="largeText = ''" @keyUp="howLong()"></textarea>
+            <label for="largeText" class="uppercase text-sm text-white tracking-widest mb-3 block">Large Text<span>*</span></label>
+            <input id="largeText" class="block w-full rounded-sm p-3 mb-4" maxlength="27" v-model="largeText" @input="howLong()" />
+            <!-- <textarea id="largeText" class="block w-full rounded-sm p-3 mb-8" maxlength="27" rows="3" v-model="largeText" @input="howLong()"></textarea> -->
 
             <!-- color schemes -->
-            <h2 class="uppercase text-sm text-white tracking-widest mb-1">Color Scheme</h2>
+            <h2 class="uppercase text-sm text-white tracking-widest mb-3">Color Scheme</h2>
             <div class="flex flex-wrap -m-1 mb-8">
-                <a href="#" @click.prevent="scheme = 'scheme-1'" class="bg-maroon w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-1' ? 'active' : ''"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-2'" class="bg-teal w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-2' ? 'active' : ''"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-3'" class="bg-royal w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-3' ? 'active' : ''"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-4'" class="bg-redOrange w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-4' ? 'active' : ''"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-5'" class="bg-sky w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-5' ? 'active' : ''"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-6'" class="bg-marigold w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-6' ? 'active' : ''"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-7'" class="bg-storm w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-7' ? 'active' : ''"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-8'" class="bg-dark-maroon w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-8' ? 'active' : ''"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-9'" class="bg-silver w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-9' ? 'active' : ''"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-10'" class="bg-cream w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-10' ? 'active' : ''"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-11'" class="bg-salmon w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-11' ? 'active' : ''"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-12'" class="bg-navy w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-12' ? 'active' : ''"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-13'" class="bg-ethos w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-13' ? 'active' : ''"></a>
-                <a href="#" @click.prevent="scheme = 'scheme-14'" class="bg-white w-10 h-10 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-14' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-1'" class="bg-maroon w-8 h-8 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-1' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-2'" class="bg-teal w-8 h-8 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-2' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-3'" class="bg-royal w-8 h-8 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-3' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-4'" class="bg-redOrange w-8 h-8 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-4' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-5'" class="bg-sky w-8 h-8 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-5' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-6'" class="bg-marigold w-8 h-8 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-6' ? 'active' : ''"></a>
+                <!-- <a href="#" @click.prevent="scheme = 'scheme-7'" class="bg-storm w-8 h-8 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-7' ? 'active' : ''"></a> -->
+                <a href="#" @click.prevent="scheme = 'scheme-8'" class="bg-dark-maroon w-8 h-8 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-8' ? 'active' : ''"></a>
+                <!-- <a href="#" @click.prevent="scheme = 'scheme-9'" class="bg-silver w-8 h-8 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-9' ? 'active' : ''"></a> -->
+                <a href="#" @click.prevent="scheme = 'scheme-10'" class="bg-cream w-8 h-8 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-10' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-11'" class="bg-salmon w-8 h-8 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-11' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-12'" class="bg-navy w-8 h-8 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-12' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-13'" class="bg-ethos w-8 h-8 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-13' ? 'active' : ''"></a>
+                <a href="#" @click.prevent="scheme = 'scheme-14'" class="bg-white w-8 h-8 rounded-full border-4 border-white m-1" :class="scheme === 'scheme-14' ? 'active' : ''"></a>
             </div>
             <!-- color schemes -->
 
             <!-- layouts -->
-            <h2 class="uppercase text-sm text-white tracking-widest mb-1">Layout</h2>
+            <h2 class="uppercase text-sm text-white tracking-widest mb-3">Layout</h2>
             <div class="flex flex-wrap -m-1 mb-8">
                 <a href="#" @click.prevent="layout = 'layout-2'">
-                    <div class="thumb flex layout-2 border-4 border-white rounded-md m-1" :class="[scheme, layout === 'layout-2' ? 'active' : '']">
+                    <div class="thumb flex layout-2 border-4 border-white squared rounded-md m-1" :class="[scheme, layout === 'layout-2' ? 'active' : '']">
                         <div class="img bg-black bg-opacity-50">
                             <img v-if="img" :src="img" class="object-cover w-full h-full" />
                         </div>
@@ -59,7 +60,7 @@
                     </div>
                 </a>
                 <a href="#" @click.prevent="layout = 'layout-3'">
-                    <div class="thumb flex layout-3 border-4 border-white rounded-md m-1" :class="[scheme, layout === 'layout-3' ? 'active' : '']">
+                    <div class="thumb flex layout-3 border-4 border-white squared rounded-md m-1" :class="[scheme, layout === 'layout-3' ? 'active' : '']">
                         <div class="img bg-black bg-opacity-50">
                             <img v-if="img" :src="img" class="object-cover w-full h-full" />
                         </div>
@@ -69,7 +70,7 @@
                     </div>
                 </a>
                 <!-- <a href="#" @click.prevent="layout = 'layout-4'">
-                    <div class="thumb flex layout-4 border-4 border-white rounded-md m-1" :class="[scheme, layout === 'layout-4' ? 'active' : '']">
+                    <div class="thumb flex layout-4 border-4 border-white squared rounded-md m-1" :class="[scheme, layout === 'layout-4' ? 'active' : '']">
                         <div class="img bg-black bg-opacity-50">
                             <img v-if="img" :src="img" class="object-cover w-full h-full" />
                         </div>
@@ -79,7 +80,7 @@
                     </div>
                 </a>
                 <a href="#" @click.prevent="layout = 'layout-4 reverse'">
-                    <div class="thumb flex flex-row-reverse layout-4 border-4 border-white rounded-md m-1" :class="[scheme, layout === 'layout-4 reverse' ? 'active' : '']">
+                    <div class="thumb flex flex-row-reverse layout-4 border-4 border-white squared rounded-md m-1" :class="[scheme, layout === 'layout-4 reverse' ? 'active' : '']">
                         <div class="img bg-black bg-opacity-50">
                             <img v-if="img" :src="img" class="object-cover w-full h-full" />
                         </div>
@@ -89,7 +90,7 @@
                     </div>
                 </a> -->
                 <a href="#" @click.prevent="layout = 'layout-3 reverse'">
-                    <div class="thumb flex flex-row-reverse layout-3 border-4 border-white rounded-md m-1" :class="[scheme, layout === 'layout-3 reverse' ? 'active' : '']">
+                    <div class="thumb flex flex-row-reverse layout-3 border-4 border-white squared rounded-md m-1" :class="[scheme, layout === 'layout-3 reverse' ? 'active' : '']">
                         <div class="img bg-black bg-opacity-50">
                             <img v-if="img" :src="img" class="object-cover w-full h-full" />
                         </div>
@@ -99,7 +100,7 @@
                     </div>
                 </a>
                 <a href="#" @click.prevent="layout = 'layout-2 reverse'">
-                    <div class="thumb flex flex-row-reverse layout-2 border-4 border-white rounded-md m-1" :class="[scheme, layout === 'layout-2 reverse' ? 'active' : '']">
+                    <div class="thumb flex flex-row-reverse layout-2 border-4 border-white squared rounded-md m-1" :class="[scheme, layout === 'layout-2 reverse' ? 'active' : '']">
                         <div class="img bg-black bg-opacity-50">
                             <img v-if="img" :src="img" class="object-cover w-full h-full" />
                         </div>
@@ -109,7 +110,7 @@
                     </div>
                 </a>
                 <!-- <a href="#" @click.prevent="layout = 'layout-5'">
-                    <div class="thumb flex layout-5 relative border-4 border-white rounded-md m-1" :class="[scheme, layout === 'layout-5' ? 'active' : '']">
+                    <div class="thumb flex layout-5 relative border-4 border-white squared rounded-md m-1" :class="[scheme, layout === 'layout-5' ? 'active' : '']">
                         <div class="img bg-black bg-opacity-50">
                             <img v-if="img" :src="img" class="object-cover w-full h-full" />
                         </div>
@@ -119,7 +120,7 @@
                     </div>
                 </a> -->
                 <a href="#" @click.prevent="layout = 'layout-1'">
-                    <div class="thumb flex layout-1 border-4 border-white rounded-md m-1" :class="[scheme, layout === 'layout-1' ? 'active' : '']">
+                    <div class="thumb flex layout-1 border-4 border-white squared rounded-md m-1" :class="[scheme, layout === 'layout-1' ? 'active' : '']">
                         <div class="text flex-1 flex text-white items-center justify-center">
                             <div class="border-t border-b border-white h-2 w-2/3 opacity-50 thumb-text"></div>
                         </div>
@@ -128,34 +129,57 @@
             </div>
             <!-- /layouts -->
 
+            <h2 class="uppercase text-sm text-white tracking-widest mb-3">Photo Categories</h2>
+            <small class="flex flex-wrap mb-8 -m-1">
+                <a class="text-white mx-1" href="#" @click.prevent="toCategory(0)" :class="(i < 10) ? 'text-redOrange underline' : ''">Campus</a>
+                <a class="text-white mx-1" href="#" @click.prevent="toCategory(10)" :class="(i >= 10 && i < 22) ? 'text-redOrange underline' : ''">Events</a>
+                <a class="text-white mx-1" href="#" @click.prevent="toCategory(22)" :class="(i >= 22 && i < 37) ? 'text-redOrange underline' : ''">Professors</a>
+                <a class="text-white mx-1" href="#" @click.prevent="toCategory(37)" :class="(i >= 37 && i < 44) ? 'text-redOrange underline' : ''">Athletics</a>
+                <a class="text-white mx-1" href="#" @click.prevent="toCategory(44)" :class="(i >= 44 && i < 80) ? 'text-redOrange underline' : ''">Students</a>
+                <a class="text-white mx-1" href="#" @click.prevent="toCategory(80)" :class="(i >= 80 && i < 92) ? 'text-redOrange underline' : ''">Grads</a>
+                <a class="text-white mx-1" href="#" @click.prevent="toCategory(92)" :class="(i >= 92 && i < 106) ? 'text-redOrange underline' : ''">Graduation</a>
+                <a class="text-white mx-1" href="#" @click.prevent="toCategory(106)" :class="(i >= 106) ? 'text-redOrange underline' : ''">OKC</a>
+            </small>
+
+
             <!-- image upload -->
-            <label for="imgUpload" class="uppercase text-sm text-white tracking-widest mb-1 block border-2  p-6 text-center cursor-pointer">&plus; Upload <span v-if="img">a different</span><span v-else>an</span> Image</label>
+            <label for="imgUpload" class="btn squared uppercase text-sm text-white tracking-widest block border-2 p-6 squared rounded-md text-center cursor-pointer">Upload a photo</label>
             <input id="imgUpload" type="file" accept="image/*" class="hidden" @change=uploadImage>
             <!-- /image upload -->
 
-            <div class="fixed bottom-0 right-0 p-8 w-1/4 bg-gray border-t border-opacity-20 border-white">
-                <a href="#" @click.prevent="save" class="uppercase text-sm text-white tracking-widest mb-1 block bg-royal  p-6 text-center cursor-pointer">&darr; Download it! </a>
+            <div class="fixed bottom-0 right-0 p-8 w-1/3 xl:w-1/4 bg-gray border-t border-opacity-20 border-white">
+                <a href="#" @click.prevent="save" class="btn squared uppercase text-sm text-white tracking-widest block bg-royal squared rounded-md p-6 text-center cursor-pointer">&darr; Download it! </a>
             </div>
 
         </div>
     </div>
 
-    <div id="viewport" class="bg-gray-100 zp-8 flex-1 flex items-center justify-center fixed inset-y-0 left-0 right-1/4 overflow-auto">
-        <div class="m-4">{{layout}} | {{scheme}} | {{textSize}}
+    <div id="viewport" class="bg-gray-100 flex-1 flex items-center justify-center fixed inset-y-0 left-0 right-1/3 xl:right-1/4 overflow-auto">
+        <div class="m-4">
             <div id="canvas" class="flex relative" :class="scheme, layout, textSize">
-                <img :src="(scheme === 'scheme-9' || scheme === 'scheme-10' || scheme === 'scheme-14') ? 'logo-maroon.svg' : 'logo.svg'" class="logo absolute right-0 z-10" width="82" />
+                <img :src="(scheme === 'scheme-5' || scheme === 'scheme-9' || scheme === 'scheme-10' || scheme === 'scheme-14') ? 'logo-maroon.svg' : 'logo.svg'" class="logo absolute right-0 z-30" width="82" />
 
-                <div class="img overflow-hidden relative cursor-pointer" @click.prevent="shuffleImages">
-                    <div class="bg-cover bg-center -inset-1 absolute" :style="{ backgroundImage: 'url(' + img + ')' }"></div>
+                <div class="img overflow-hidden relative">
+                    <a href="#" class="absolute inset-0 right-1/2 z-10 opacity-0 hover:opacity-100 bg-black bg-opacity-50 text-white leading-tight flex items-center justify-center text-center uppercase text-xs text-white tracking-widest p-2" style="cursor: w-resize" @click.prevent="prevImg" title="Load the previous photo">
+                        Previous photo
+                    </a>
+                    <a href="#" class="absolute inset-0 left-1/2 z-10 opacity-0 hover:opacity-100 bg-black bg-opacity-50 text-white leading-tight flex items-center justify-center text-center uppercase text-xs text-white tracking-widest p-2" style="cursor: e-resize" @click.prevent="nextImg" title="Load the next photo">
+                        Next photo
+                    </a>
+                    <a href="#" class="absolute inset-0 top-2/3 z-20 opacity-0 hover:opacity-100 bg-black bg-opacity-50 text-white leading-tight flex items-center justify-center text-center uppercase text-xs text-white tracking-widest p-2" style="cursor: pointer" @click.prevent="shuffleImages" title="Load a random photo">
+                        Random photo
+                    </a>
+                    <div class="main-img bg-cover bg-center -inset-1 absolute" :style="{ backgroundImage: 'url(' + img + ')' }"></div>
                 </div>
 
                 <div class="text p-8 flex-1 flex flex-col justify-center">
                     <h4 class="text-marigold uppercase text-sm tracking-widest" :class="(largeText !== '') ? 'mb-2' : ''">
                         {{ smallText }}
                     </h4>
-                    <h1 class="text-white uppercase tracking-widest leading-tight zfont-normal whitespace-pre-line">{{ largeText }}</h1>
+                    <h1 class="text-white uppercase tracking-widest leading-tight whitespace-pre-line">{{ largeText }}</h1>
                 </div>
             </div>
+            <small class="hidden">{{layout}} | {{scheme}} | {{textSize}}</small>
         </div>
     </div>
 
@@ -167,68 +191,136 @@ const app = {
     data() {
         return {
             smallText: 'Optional small text',
-            // largeText: 'The world awaits your story',
-            largeText: 'Large text',
+            largeText: 'The world awaits your story',
             textSize: 'text-short',
-            // smallText: 'Did you get pears?',
-            // largeText: 'We\'ll discuss it inside.',
-            scheme: 'scheme-' + Math.ceil(Math.random() * 14),
-            layout: 'layout-' + Math.ceil(Math.random() * 3),
+            // scheme: 'scheme-' + Math.ceil(Math.random() * 14),
+            // layout: 'layout-' + Math.ceil(Math.random() * 3),
+            layout: 'layout-2',
+            scheme: 'scheme-1',
             images: [
-                'img/art1.jpg',
-                'img/art2.jpg',
-                'img/art3.jpg',
-                'img/art4.jpg',
-                'img/bible1.jpg',
-                'img/biology1.jpg',
-                'img/biology2.jpg',
-                'img/business1.jpg',
-                'img/business2.jpg',
-                'img/campus1.jpg',
                 'img/campus2.jpg',
+                'img/campus1.jpg',
                 'img/campus3.jpg',
                 'img/campus4.jpg',
                 'img/campus5.jpg',
                 'img/campus6.jpg',
-                'img/computer1.jpg',
-                'img/computer2.jpg',
-                'img/computer3.jpg',
-                'img/computer4.jpg',
-                'img/education1.jpg',
-                'img/engineering1.jpg',
-                'img/engineering2.jpg',
-                'img/engineering3.jpg',
-                'img/engineering4.jpg',
-                'img/engineering5.jpg',
-                'img/engineering6.jpg',
-                'img/engineering7.jpg',
-                'img/engineering8.jpg',
-                'img/english1.jpg',
-                'img/english2.jpg',
-                'img/gaming2.jpg',
-                'img/gaming3.jpg',
-                'img/gaming4.jpg',
-                'img/gaming5.jpg',
+                'img/campus7.png',
+                'img/campus8.jpg',
+                'img/campus9.jpg',
+                'img/campus10.jpg',
+                'img/events5.jpg',
+                'img/events1.jpg',
+                'img/events2.jpg',
+                'img/events3.jpg',
+                'img/events4.jpg',
+                'img/events6.jpg',
+                'img/events7.jpg',
+                'img/events8.jpg',
+                'img/events9.jpg',
+                'img/events10.jpg',
+                'img/events11.jpg',
+                'img/events12.jpg',
+                'img/profs1.jpg',
+                'img/profs2.jpg',
+                'img/profs3.jpg',
+                'img/profs4.jpg',
+                'img/profs5.jpg',
+                'img/profs6.jpg',
+                'img/profs7.jpg',
+                'img/profs8.jpg',
+                'img/profs9.jpg',
+                'img/profs10.jpg',
+                'img/profs11.jpg',
+                'img/profs12.jpg',
+                'img/profs13.jpg',
+                'img/profs14.jpg',
+                'img/profs15.jpg',
+                'img/athletics1.jpg',
+                'img/athletics2.jpg',
+                'img/athletics3.jpg',
+                'img/athletics4.jpg',
+                'img/athletics5.jpg',
+                'img/athletics6.jpg',
+                'img/athletics7.jpg',
+                'img/student1.jpg',
+                'img/student2.jpg',
+                'img/student3.jpg',
+                'img/student4.jpg',
+                'img/student5.jpg',
+                'img/student6.jpg',
+                'img/student7.jpg',
+                'img/student8.jpg',
+                'img/student9.jpg',
+                'img/student10.jpg',
+                'img/student11.jpg',
+                'img/student12.jpg',
+                'img/student13.jpg',
+                'img/student14.jpg',
+                'img/student15.jpg',
+                'img/student16.jpg',
+                'img/student17.jpg',
+                'img/student18.jpg',
+                'img/student19.jpg',
+                'img/student20.jpg',
+                'img/student21.jpg',
+                'img/student22.jpg',
+                'img/student23.jpg',
+                'img/student24.jpg',
+                'img/student25.jpg',
+                'img/student26.jpg',
+                'img/student27.jpg',
+                'img/student28.jpg',
+                'img/student29.jpg',
+                'img/student30.jpg',
+                'img/student31.jpg',
+                'img/student32.jpg',
+                'img/student33.jpg',
+                'img/student34.jpg',
+                'img/student35.jpg',
+                'img/student36.jpg',
+                'img/grads1.jpg',
+                'img/grads2.jpg',
+                'img/grads3.jpg',
+                'img/grads4.jpg',
+                'img/grads5.jpg',
+                'img/grads6.jpg',
+                'img/grads7.jpg',
+                'img/grads8.jpg',
+                'img/grads9.jpg',
+                'img/grads10.jpg',
+                'img/grads11.jpg',
+                'img/grads12.jpg',
                 'img/graduation1.jpg',
-                'img/ike.jpg',
-                'img/ike2.jpg',
-                'img/interiordesign1.jpg',
-                'img/math1.jpg',
-                'img/media1.jpg',
-                'img/music1.jpg',
-                'img/music2.jpg',
-                'img/nursing1.jpg',
-                'img/nursing2.jpg',
-                'img/nursing3.jpg',
-                'img/science1.jpg',
-                'img/science2.jpg',
-                'img/science3.jpg',
-                'img/science4.jpg',
-                'img/studyabroad1.jpg',
-                'img/studyabroad2.jpg',
-                'img/studyabroad3.jpg'
+                'img/graduation2.jpg',
+                'img/graduation3.jpg',
+                'img/graduation4.jpg',
+                'img/graduation5.jpg',
+                'img/graduation6.jpg',
+                'img/graduation7.jpg',
+                'img/graduation8.jpg',
+                'img/graduation9.jpg',
+                'img/graduation10.jpg',
+                'img/graduation11.jpg',
+                'img/graduation12.jpg',
+                'img/graduation13.jpg',
+                'img/graduation14.jpg',
+                'img/okc1.jpg',
+                'img/okc2.jpg',
+                'img/okc3.jpg',
+                'img/okc4.jpg',
+                'img/okc5.jpg',
+                'img/okc6.jpg',
+                'img/okc7.jpg',
+                'img/okc8.jpg',
+                'img/okc9.jpg',
+                'img/okc10.jpg',
+                'img/okc11.jpg',
+                'img/okc12.jpg',
+                'img/okc13.jpg',
+                'img/okc14.jpg',
             ],
-            img: 'img/engineering5.jpg'
+            img: 'img/campus2.jpg',
+            i: 0
         }
     },
     methods: {
@@ -246,8 +338,36 @@ const app = {
             const random = Math.floor(Math.random() * total);
             console.log(this.images[random]);
             this.img = this.images[random];
+            this.i = random;
+        },
+        prevImg() {
+            if (this.i === 0) {
+                this.i++;
+                this.i = this.images.length - 1
+            } else {
+                this.i--;
+            }
+            console.log('nextImg', this.i)
+            this.img = this.images[this.i];
+        },
+        nextImg() {
+            if (this.i < this.images.length - 1) {
+                this.i++;
+            } else {
+                this.i = 0;
+            }
+            console.log('nextImg', this.i)
+            this.img = this.images[this.i];
+        },
+        toCategory(index) {
+          this.i = index;
+          this.img = this.images[this.i];
         },
         save() {
+            if (this.largeText.length === 0) {
+                alert('Large text is required.');
+                return false;
+            }
             const scale = 2;
             const canvas = document.getElementById('canvas');
             domtoimage.toPng(canvas, {
@@ -269,12 +389,20 @@ const app = {
             });
         },
         howLong() {
-            this.textSize = this.largeText.length > 17 ? 'text-long' : 'text-short';
+            this.textSize = (this.largeText.length > 17 && this.smallText.length > 0) ? 'text-long' : 'text-short';
         }
     },
     mounted() {
-        this.shuffleImages();
+        // this.shuffleImages();
         this.howLong();
+        // window.addEventListener('keydown', (e) => {
+        //     console.log(e.key);
+        //     if (e.key == 'ArrowLeft') {
+        //         this.prevImg()
+        //     } else if  (e.key == 'ArrowRight') {
+        //         this.nextImg()
+        //     }
+        // });
     }
 }
 
