@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🧑‍🍳 Let's make a header!</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://use.typekit.net/nyp5qmz.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <link href="app.css?v=1.17" rel="stylesheet" />
+    <script
+      src="https://unpkg.com/vue@3.1.1/dist/vue.global.prod.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div id="app" class="flex flex-row-reverse min-h-screen">
+      <!-- <div class="fixed top-0 left-0 bg-royal h-2 transform transition-all" :style="{width: progress + '%'}"></div> -->
+
+      <div id="tools" class="bg-gray p-8 pb-44 w-1/4">
+        <div class="sticky top-8">
+          <label
+            for="smallText"
+            class="uppercase text-sm text-white tracking-widest mb-3 block"
+            >Small Text</label
+          >
+          <input
+            id="smallText"
+            class="block w-full rounded-sm p-3 mb-4"
+            maxlength="50"
+            v-model="smallText"
+          />
+
+          <label
+            for="largeText"
+            class="uppercase text-sm text-white tracking-widest mb-3 block"
+            >Large Text<span>*</span></label
+          >
+          <input
+            id="largeText"
+            class="block w-full rounded-sm p-3 mb-4"
+            maxlength="21"
+            v-model="largeText"
+          />
+
+          <label
+            for="smallTextB"
+            class="uppercase text-sm text-white tracking-widest mb-3 block"
+            >Small Text - lower</label
+          >
+          <textarea
+            id="smallTextB"
+            class="block w-full rounded-sm p-3 mb-4"
+            rows="4"
+            maxlength="90"
+            v-model="smallTextB"
+          ></textarea>
+
+          <div
+            class="
+              fixed
+              bottom-0
+              right-0
+              p-8
+              w-1/4
+              bg-gray
+              border-t border-opacity-20 border-white
+            "
+          >
+            <a
+              href="#"
+              @click.prevent="save"
+              class="
+                btn
+                squared
+                uppercase
+                text-sm text-white
+                tracking-widest
+                block
+                bg-royal
+                squared
+                rounded-md
+                p-6
+                text-center
+                cursor-pointer
+              "
+              >&darr; Download it!
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="viewport"
+        class="
+          bg-gray-100
+          flex-1 flex
+          items-center
+          justify-center
+          fixed
+          inset-y-0
+          left-0
+          right-1/4
+          overflow-auto
+        "
+      >
+        <div class="m-4 bg-white">
+          <div id="canvas" class="bg-transparent flex">
+            <div
+              class="flex justify-between items-start"
+              style="margin: 109px 90px 60px; width: 100%"
+            >
+              <div class="text flex-1">
+                <h4
+                  v-if="smallText"
+                  class="
+                    text-maroon
+                    uppercase
+                    tracking-widest
+                    whitespace-nowrap
+                    mb-4
+                  "
+                >
+                  {{ smallText }}
+                </h4>
+                <h1
+                  class="
+                    text-maroon
+                    uppercase
+                    condensed
+                    font-normal
+                    whitespace-nowrap
+                    mb-3
+                  "
+                >
+                  {{ largeText }}
+                </h1>
+                <h4
+                  v-if="smallTextB"
+                  class="
+                    meta
+                    text-ethos
+                    uppercase
+                    tracking-widest
+                    mb-4
+                    whitespace-pre-line
+                    leading-relaxed
+                  "
+                  style="font-size: 0.9rem; padding-top: 0.15rem"
+                >
+                  {{ smallTextB }}
+                </h4>
+              </div>
+
+              <img
+                src="logo-maroon.svg"
+                class="logo flex-none ml-8"
+                :class="smallText.length !== 0 ? 'mt-2' : ''"
+                width="156"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const app = {
+        data() {
+          return {
+            smallText: "Bachelor of Arts In",
+            largeText: "Preaching Ministry",
+            smallTextB:
+              "74-75 hours + 6 hours Biblical Language \nNo minor required",
+          };
+        },
+        methods: {
+          save() {
+            if (this.largeText.length === 0) {
+              alert("Large text is required.");
+              return false;
+            }
+            const scale = 5;
+            const canvas = document.getElementById("canvas");
+            domtoimage
+              .toPng(canvas, {
+                quality: 1,
+                width: canvas.clientWidth * scale,
+                height: canvas.clientHeight * scale,
+                style: {
+                  transform: "scale(" + scale + ")",
+                  transformOrigin: "top left",
+                  width: canvas.offsetWidth + "px",
+                  height: canvas.offsetHeight + "px",
+                },
+              })
+              .then(function (dataUrl) {
+                var link = document.createElement("a");
+                link.download = "header.png";
+                link.href = dataUrl;
+                link.click();
+              });
+          },
+        },
+      };
+
+      Vue.createApp(app).mount("#app");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,366 @@
+:root {
+  --maroon: #801328;
+  /* --dark-maroon: #48111c; */
+  --dark-maroon: #41101a;
+  --silver: #d5dfe7;
+  --cream: #f4ecd0;
+  --teal: #27575a;
+  /* --royal: #118acb; */
+  --royal: #1173b0;
+  --redOrange: #f04e3e;
+  --sky: #bde3dc;
+  --marigold: #f9c634;
+  --storm: #708e9a;
+  /* --salmon: #f68d76; */
+  --salmon: #fa8e79;
+  --navy: #004761;
+  --ethos: #5ec4b6;
+
+  color: var(--maroon);
+  font-family: sofia-pro;
+  font-size: 17px;
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+@font-face {
+  font-family: "Standard CT";
+  src: url("../bb/fonts/standardextracond-medium-2015.02.25-webfont.woff2")
+      format("woff2"),
+    url("../bb/fonts/standardextracond-medium-2015.02.25-webfont.woff")
+      format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+/* #viewport * {
+  outline: 1px solid red;
+} */
+.condensed {
+  font-family: "Standard CT";
+  line-height: 0.85;
+  letter-spacing: 0.017em;
+  font-size: 5.35rem;
+}
+#canvas {
+  width: 1020px;
+  /* height: 337px; */
+  /* padding: 109px 90px 60px; */
+}
+#canvas .text {
+  /* padding: 114px 90px 60px; */
+}
+.thumb {
+  width: 109px;
+  height: 73px;
+}
+.active {
+  box-shadow: 0 0 0 2px var(--redOrange);
+}
+.btn:hover {
+  background: var(--redOrange);
+}
+.squared {
+  transition: all 0.125s ease-out;
+}
+.squared:hover {
+  border-radius: 0;
+}
+/* tailwind overrides */
+.tracking-widest {
+  letter-spacing: 0.22em;
+}
+.rounded-4xl {
+  border-radius: 2rem;
+}
+
+.text-maroon {
+  color: var(--maroon);
+}
+.text-dark-maroon {
+  color: var(--dark-maroon);
+}
+.text-silver {
+  color: var(--silver);
+}
+.text-cream {
+  color: var(--cream);
+}
+.text-teal {
+  color: var(--teal);
+}
+.text-royal {
+  color: var(--royal);
+}
+.text-redOrange {
+  color: var(--redOrange);
+}
+.text-sky {
+  color: var(--sky);
+}
+.text-marigold {
+  color: var(--marigold);
+}
+.text-storm {
+  color: var(--storm);
+}
+.text-salmon {
+  color: var(--salmon);
+}
+.text-navy {
+  color: var(--navy);
+}
+.text-ethos {
+  color: var(--ethos);
+}
+.text-gray {
+  color: #333;
+}
+
+.bg-maroon {
+  background-color: var(--maroon);
+}
+.bg-dark-maroon {
+  background-color: var(--dark-maroon);
+}
+.bg-silver {
+  background-color: var(--silver);
+}
+.bg-cream {
+  background-color: var(--cream);
+}
+.bg-teal {
+  background-color: var(--teal);
+}
+.bg-royal {
+  background-color: var(--royal);
+}
+.bg-redOrange {
+  background-color: var(--redOrange);
+}
+.bg-sky {
+  background-color: var(--sky);
+}
+.bg-marigold {
+  background-color: var(--marigold);
+}
+.bg-storm {
+  background-color: var(--storm);
+}
+.bg-salmon {
+  background-color: var(--salmon);
+}
+.bg-navy {
+  background-color: var(--navy);
+}
+.bg-ethos {
+  background-color: var(--ethos);
+}
+.bg-gray {
+  background-color: #333;
+}
+
+h1 {
+  font-size: 2.75rem;
+}
+.logo {
+  /* top: 20px; */
+  /* width: 80px; */
+}
+/* layout-1: no image */
+.layout-1 .img {
+  width: 0;
+}
+.layout-1 h1,
+.layout-5 h1 {
+  /* font-size: 4.75rem; */
+}
+
+.layout-2 .img {
+  width: 40%;
+}
+/* .layout-2.text-long .text > * {
+  margin-bottom: auto;
+} */
+.text-long:not(.layout-1) .text {
+  justify-content: space-between;
+}
+.layout-3 .img {
+  width: 50%;
+}
+.layout-3 h1 {
+  font-size: 2.25rem;
+}
+#canvas.layout-3:not(.reverse) .text {
+  /* padding-top: 4.5rem; */
+}
+.layout-3.text-long:not(.reverse) .text {
+  justify-content: flex-end;
+}
+
+/* .layout-4 .img {
+  width: 60%;
+} */
+
+/* layout-2: 1/3 image */
+/* .layout-2 .img {
+  height: 33.33%;
+} */
+
+/* layout-3: 1/2 image */
+/* .layout-3 .img {
+  height: 50%;
+} */
+/* .layout-2 h1,
+.layout-3 h1 {font-size: 3.25rem;} */
+
+/* .layout-4 .img {
+  height: auto;
+  flex-grow: 1;
+}
+.layout-4 .text {
+  height: auto;
+  flex-grow: 0;
+} */
+
+/* layout-5 - text over image */
+/* .layout-5 .img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0.25;
+  filter: grayscale();
+}
+.layout-5 .text > * {
+  z-index: 100;
+} */
+
+/* reverse text and image */
+.reverse {
+  flex-direction: row-reverse;
+}
+/* .reverse .text {
+  padding-top: 8rem;
+} */
+
+/* .layout-4.reverse .text {
+  padding-top: 4rem;
+}
+.layout-4.reverse .logo {
+  top: auto;
+  bottom: 1rem;
+} */
+
+.scheme-1 {
+  background-color: var(--maroon);
+}
+.scheme-2 {
+  background-color: var(--teal);
+}
+.scheme-2 h4 {
+  color: var(--sky);
+}
+.scheme-3 {
+  background-color: var(--royal);
+}
+.scheme-3 h4 {
+  color: #fff;
+}
+.scheme-4 {
+  background-color: var(--redOrange);
+}
+.scheme-4 h4 {
+  color: var(--dark-maroon);
+}
+.scheme-5 {
+  background-color: var(--sky);
+}
+.scheme-5 h4 {
+  color: var(--teal);
+}
+.scheme-5 h1 {
+  color: var(--maroon);
+}
+.thumb.scheme-5 .thumb-text {
+  border-color: var(--teal);
+}
+.scheme-6 {
+  background-color: var(--marigold);
+}
+.scheme-6 h4 {
+  color: var(--maroon);
+}
+.scheme-6 h1 {
+  color: var(--maroon);
+}
+.thumb.scheme-6 .thumb-text,
+.thumb.scheme-9 .thumb-text,
+.thumb.scheme-10 .thumb-text,
+.thumb.scheme-11 .thumb-text,
+.thumb.scheme-14 .thumb-text {
+  border-color: var(--maroon);
+}
+.scheme-7 {
+  background-color: var(--storm);
+}
+.scheme-7 h4 {
+  color: var(--dark-maroon);
+}
+.scheme-8 {
+  background-color: var(--dark-maroon);
+}
+.scheme-8 h4 {
+  color: var(--redOrange);
+}
+.scheme-9 {
+  background-color: var(--silver);
+}
+.scheme-9 h4 {
+  color: var(--teal);
+}
+.scheme-9 h1 {
+  color: var(--maroon);
+}
+.scheme-10 {
+  background-color: var(--cream);
+}
+.scheme-10 h4 {
+  color: var(--teal);
+}
+.scheme-10 h1 {
+  color: var(--maroon);
+}
+.scheme-11 {
+  background-color: var(--salmon);
+}
+.scheme-11 h4 {
+  color: var(--maroon);
+}
+.scheme-11 h1 {
+  color: var(--maroon);
+}
+.scheme-12 {
+  background-color: var(--navy);
+}
+.scheme-12 h4 {
+  color: var(--sky);
+}
+.scheme-12 h1 {
+  color: white;
+}
+.scheme-13 {
+  background-color: var(--ethos);
+}
+.scheme-13 h4 {
+  color: var(--teal);
+}
+.scheme-14 {
+  background-color: white;
+}
+.scheme-14 h4 {
+  color: var(--maroon);
+}
+.scheme-14 h1 {
+  color: var(--redOrange);
+}
