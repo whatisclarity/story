@@ -17,6 +17,8 @@
   font-family: sofia-pro;
   font-size: 17px;
   font-weight: 600;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 @font-face {
   font-family: "Standard CT";
