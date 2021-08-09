@@ -15,7 +15,7 @@
       rel="stylesheet"
       crossorigin="anonymous"
     />
-    <link href="app.css?v=1.17" rel="stylesheet" />
+    <link href="app.css?v=1.18" rel="stylesheet" />
     <script
       src="https://unpkg.com/vue@3.1.1/dist/vue.global.prod.js"
       crossorigin="anonymous"
@@ -125,100 +125,122 @@
           overflow-auto
         "
       >
-        <div class="m-4 bg-white">
-          <div id="hd" class="bg-transparent flex">
-            <div
-              class="flex justify-between items-start"
-              style="margin: 109px 90px 46px; width: 100%"
-            >
-              <div class="text flex-1">
-                <h4
-                  v-if="smallText"
-                  class="
-                    text-maroon
-                    uppercase
-                    tracking-widest
-                    whitespace-nowrap
-                    mb-4
-                  "
-                >
-                  {{ smallText }}
-                </h4>
-                <h1
+        <div>
+          <h2
+            class="mx-4 text-black opacity-40 uppercase tracking-widest text-sm"
+          >
+            Header Graphic - Front Page
+          </h2>
+          <div class="m-4 bg-white">
+            <div id="header" class="bg-transparent flex">
+              <div
+                class="flex justify-between items-start"
+                style="margin: 109px 90px 46px; width: 100%"
+              >
+                <div class="text flex-1">
+                  <h4
+                    v-if="smallText"
+                    class="
+                      text-maroon
+                      uppercase
+                      tracking-widest
+                      whitespace-nowrap
+                      mb-4
+                    "
+                  >
+                    {{ smallText }}
+                  </h4>
+                  <h1
+                    class="
+                      text-maroon
+                      uppercase
+                      condensed
+                      font-normal
+                      whitespace-nowrap
+                      mb-3
+                    "
+                  >
+                    {{ largeText }}
+                  </h1>
+                  <h4
+                    v-if="smallTextB"
+                    class="
+                      meta
+                      text-ethos
+                      uppercase
+                      tracking-widest
+                      whitespace-pre-line
+                      leading-relaxed
+                    "
+                    style="font-size: 0.9rem; padding-top: 0.15rem"
+                  >
+                    {{ smallTextB }}
+                  </h4>
+                </div>
+
+                <img
+                  src="logo-maroon.svg"
+                  class="logo flex-none ml-8"
+                  :class="smallText.length !== 0 ? 'mt-2' : ''"
+                  width="156"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2
+            class="
+              mx-4
+              mt-10
+              text-black
+              opacity-40
+              uppercase
+              tracking-widest
+              text-sm
+            "
+          >
+            Footer Graphic - Last Page
+          </h2>
+          <div class="m-4 bg-white">
+            <div id="footer" class="bg-transparent flex">
+              <div
+                class="flex justify-between items-end"
+                style="margin: 85px 90px 59px; width: 100%"
+              >
+                <div class="text flex-1">
+                  <h4
+                    v-if="smallTextB"
+                    class="
+                      meta
+                      text-ethos
+                      uppercase
+                      tracking-widest
+                      whitespace-pre-line
+                      leading-relaxed
+                    "
+                    style="font-size: 1.1rem; padding: 0 1rem 0 0"
+                  >
+                    {{division}}
+                  </h4>
+                </div>
+
+                <h2
                   class="
                     text-maroon
                     uppercase
                     condensed
                     font-normal
                     whitespace-nowrap
-                    mb-3
+                    text-xs
+                    wordmark
                   "
+                  style="font-size: 2.5rem; letter-spacing: 0.045em"
                 >
-                  {{ largeText }}
-                </h1>
-                <h4
-                  v-if="smallTextB"
-                  class="
-                    meta
-                    text-ethos
-                    uppercase
-                    tracking-widest
-                    whitespace-pre-line
-                    leading-relaxed
-                  "
-                  style="font-size: 0.9rem; padding-top: 0.15rem"
-                >
-                  {{ smallTextB }}
-                </h4>
+                  Oklahoma Christian University
+                </h2>
               </div>
-
-              <img
-                src="logo-maroon.svg"
-                class="logo flex-none ml-8"
-                :class="smallText.length !== 0 ? 'mt-2' : ''"
-                width="156"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="m-4 bg-white">
-          <div id="ft" class="bg-transparent flex">
-            <div
-              class="flex justify-between items-end"
-              style="margin: 85px 90px 59px; width: 100%"
-            >
-              <div class="text flex-1">
-                <h4
-                  v-if="smallTextB"
-                  class="
-                    meta
-                    text-ethos
-                    uppercase
-                    tracking-widest
-                    whitespace-pre-line
-                    leading-relaxed
-                  "
-                  style="font-size: 1.1rem; padding: 0 1rem 0 0"
-                >
-                  {{division}}
-                </h4>
-              </div>
-
-              <h2
-                class="
-                  text-maroon
-                  uppercase
-                  condensed
-                  font-normal
-                  whitespace-nowrap
-                  text-xs
-                  wordmark
-                "
-                style="font-size: 2.5rem; letter-spacing: 0.045em"
-              >
-                Oklahoma Christian University
-              </h2>
             </div>
           </div>
         </div>
@@ -262,8 +284,8 @@
             // alert(format);
           },
           build() {
-            this.save("hd");
-            this.save("ft");
+            this.save("header");
+            this.save("footer");
           },
         },
       };
