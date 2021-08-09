@@ -41,12 +41,13 @@
   letter-spacing: 0.017em;
   font-size: 5.35rem;
 }
-#canvas {
+#hd,
+#ft {
   width: 1020px;
   /* height: 337px; */
   /* padding: 109px 90px 60px; */
 }
-#canvas .text {
+#hd .text {
   /* padding: 114px 90px 60px; */
 }
 .thumb {
@@ -190,7 +191,7 @@ h1 {
 .layout-3 h1 {
   font-size: 2.25rem;
 }
-#canvas.layout-3:not(.reverse) .text {
+#hd.layout-3:not(.reverse) .text {
   /* padding-top: 4.5rem; */
 }
 .layout-3.text-long:not(.reverse) .text {

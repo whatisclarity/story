@@ -27,8 +27,6 @@
   </head>
   <body>
     <div id="app" class="flex flex-row-reverse min-h-screen">
-      <!-- <div class="fixed top-0 left-0 bg-royal h-2 transform transition-all" :style="{width: progress + '%'}"></div> -->
-
       <div id="tools" class="bg-gray p-8 pb-44 w-1/4">
         <div class="sticky top-8">
           <label
@@ -68,6 +66,17 @@
             v-model="smallTextB"
           ></textarea>
 
+          <label
+            for="division"
+            class="uppercase text-sm text-white tracking-widest mb-3 block"
+            >Division Name</label
+          >
+          <input
+            id="division"
+            class="block w-full rounded-sm p-3 mb-4"
+            v-model="division"
+          />
+
           <div
             class="
               fixed
@@ -81,7 +90,7 @@
           >
             <a
               href="#"
-              @click.prevent="save"
+              @click.prevent="build"
               class="
                 btn
                 squared
@@ -106,7 +115,7 @@
         id="viewport"
         class="
           bg-gray-100
-          flex-1 flex
+          flex-1 flex flex-col
           items-center
           justify-center
           fixed
@@ -117,7 +126,7 @@
         "
       >
         <div class="m-4 bg-white">
-          <div id="canvas" class="bg-transparent flex">
+          <div id="hd" class="bg-transparent flex">
             <div
               class="flex justify-between items-start"
               style="margin: 109px 90px 46px; width: 100%"
@@ -172,6 +181,47 @@
             </div>
           </div>
         </div>
+
+        <div class="m-4 bg-white">
+          <div id="ft" class="bg-transparent flex">
+            <div
+              class="flex justify-between items-end"
+              style="margin: 85px 90px 59px; width: 100%"
+            >
+              <div class="text flex-1">
+                <h4
+                  v-if="smallTextB"
+                  class="
+                    meta
+                    text-ethos
+                    uppercase
+                    tracking-widest
+                    whitespace-pre-line
+                    leading-relaxed
+                  "
+                  style="font-size: 1.1rem; padding: 0 1rem 0 0"
+                >
+                  {{division}}
+                </h4>
+              </div>
+
+              <h2
+                class="
+                  text-maroon
+                  uppercase
+                  condensed
+                  font-normal
+                  whitespace-nowrap
+                  text-xs
+                  wordmark
+                "
+                style="font-size: 2.5rem; letter-spacing: 0.045em"
+              >
+                Oklahoma Christian University
+              </h2>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -183,16 +233,14 @@
             largeText: "Preaching Ministry",
             smallTextB:
               "74-75 hours + 6 hours Biblical Language \nNo minor required",
+            division: "Division Name Here",
           };
         },
         methods: {
-          save() {
-            if (this.largeText.length === 0) {
-              alert("Large text is required.");
-              return false;
-            }
+          save(format) {
+            const el = format;
             const scale = 5;
-            const canvas = document.getElementById("canvas");
+            const canvas = document.getElementById(el);
             domtoimage
               .toPng(canvas, {
                 quality: 1,
@@ -207,10 +255,15 @@
               })
               .then(function (dataUrl) {
                 var link = document.createElement("a");
-                link.download = "header.png";
+                link.download = "degreeplan_" + format + ".png";
                 link.href = dataUrl;
                 link.click();
               });
+            // alert(format);
+          },
+          build() {
+            this.save("hd");
+            this.save("ft");
           },
         },
       };
