@@ -5,241 +5,62 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>🧑‍🍳 Let's make a header!</title>
-    <link
-      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
-      rel="stylesheet"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://use.typekit.net/nyp5qmz.css"
-      rel="stylesheet"
-      crossorigin="anonymous"
-    />
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <link href="https://use.typekit.net/nyp5qmz.css" rel="stylesheet" crossorigin="anonymous" />
     <link href="app.css?v=1.18" rel="stylesheet" />
-    <script
-      src="https://unpkg.com/vue@3.1.1/dist/vue.global.prod.js"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://unpkg.com/vue@3.1.1/dist/vue.global.prod.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <div id="app" class="flex flex-row-reverse min-h-screen">
       <div id="tools" class="bg-gray p-8 pb-44 w-1/4">
         <div class="sticky top-8">
-          <label
-            for="smallText"
-            class="uppercase text-sm text-white tracking-widest mb-3 block"
-            >Small Text</label
-          >
-          <input
-            id="smallText"
-            class="block w-full rounded-sm p-3 mb-4"
-            maxlength="50"
-            v-model="smallText"
-          />
+          <label for="smallText" class="uppercase text-sm text-white tracking-widest mb-3 block">Small Text</label>
+          <input id="smallText" class="block w-full rounded-sm p-3 mb-4" maxlength="50" v-model="smallText" />
 
-          <label
-            for="largeText"
-            class="uppercase text-sm text-white tracking-widest mb-3 block"
-            >Large Text<span>*</span></label
-          >
-          <input
-            id="largeText"
-            class="block w-full rounded-sm p-3 mb-4"
-            maxlength="21"
-            v-model="largeText"
-          />
+          <label for="largeText" class="uppercase text-sm text-white tracking-widest mb-3 block">Large Text<span>*</span></label>
+          <input id="largeText" class="block w-full rounded-sm p-3 mb-4" maxlength="50" v-model="largeText" />
 
-          <label
-            for="smallTextB"
-            class="uppercase text-sm text-white tracking-widest mb-3 block"
-            >Small Text - lower</label
-          >
-          <textarea
-            id="smallTextB"
-            class="block w-full rounded-sm p-3 mb-4"
-            rows="4"
-            maxlength="90"
-            v-model="smallTextB"
-          ></textarea>
+          <label for="smallTextB" class="uppercase text-sm text-white tracking-widest mb-3 block">Small Text - lower</label>
+          <textarea id="smallTextB" class="block w-full rounded-sm p-3 mb-4" rows="4" maxlength="90" v-model="smallTextB"></textarea>
 
-          <label
-            for="division"
-            class="uppercase text-sm text-white tracking-widest mb-3 block"
-            >Division Name</label
-          >
-          <input
-            id="division"
-            class="block w-full rounded-sm p-3 mb-4"
-            v-model="division"
-          />
+          <label for="division" class="uppercase text-sm text-white tracking-widest mb-3 block">Division Name</label>
+          <input id="division" class="block w-full rounded-sm p-3 mb-4" v-model="division" />
 
-          <div
-            class="
-              fixed
-              bottom-0
-              right-0
-              p-8
-              w-1/4
-              bg-gray
-              border-t border-opacity-20 border-white
-            "
-          >
-            <a
-              href="#"
-              @click.prevent="build"
-              class="
-                btn
-                squared
-                uppercase
-                text-sm text-white
-                tracking-widest
-                block
-                bg-royal
-                squared
-                rounded-md
-                p-6
-                text-center
-                cursor-pointer
-              "
-              >&darr; Download it!
-            </a>
+          <div class="fixed bottom-0 right-0 p-8 w-1/4 bg-gray border-t border-opacity-20 border-white">
+            <a href="#" @click.prevent="build" class="btn squared uppercase text-sm text-white tracking-widest block bg-royal squared rounded-md p-6 text-center cursor-pointer">&darr; Download it! </a>
           </div>
         </div>
       </div>
 
-      <div
-        id="viewport"
-        class="
-          bg-gray-100
-          flex-1 flex flex-col
-          items-center
-          justify-center
-          fixed
-          inset-y-0
-          left-0
-          right-1/4
-          overflow-auto
-        "
-      >
+      <div id="viewport" class="bg-gray-100 flex-1 flex flex-col items-center justify-center fixed inset-y-0 left-0 right-1/4 overflow-auto">
         <div>
-          <h2
-            class="mx-4 text-black opacity-40 uppercase tracking-widest text-sm"
-          >
-            Header Graphic - Front Page
-          </h2>
+          <h2 class="mx-4 text-black opacity-40 uppercase tracking-widest text-sm">Header Graphic - Front Page</h2>
           <div class="m-4 bg-white">
             <div id="header" class="bg-transparent flex">
-              <div
-                class="flex justify-between items-start"
-                style="margin: 109px 90px 46px; width: 100%"
-              >
+              <div class="flex justify-between items-start" style="margin: 109px 90px 46px; width: 100%">
                 <div class="text flex-1">
-                  <h4
-                    v-if="smallText"
-                    class="
-                      text-maroon
-                      uppercase
-                      tracking-widest
-                      whitespace-nowrap
-                      mb-4
-                    "
-                  >
-                    {{ smallText }}
-                  </h4>
-                  <h1
-                    class="
-                      text-maroon
-                      uppercase
-                      condensed
-                      font-normal
-                      whitespace-nowrap
-                      mb-3
-                    "
-                  >
-                    {{ largeText }}
-                  </h1>
-                  <h4
-                    v-if="smallTextB"
-                    class="
-                      meta
-                      text-ethos
-                      uppercase
-                      tracking-widest
-                      whitespace-pre-line
-                      leading-relaxed
-                    "
-                    style="font-size: 0.9rem; padding-top: 0.15rem"
-                  >
-                    {{ smallTextB }}
-                  </h4>
+                  <h4 v-if="smallText" class="text-maroon uppercase tracking-widest whitespace-nowrap mb-4">{{ smallText }}</h4>
+                  <h1 class="text-maroon uppercase condensed font-normal mb-3">{{ largeText }}</h1>
+                  <h4 v-if="smallTextB" class="meta text-ethos uppercase tracking-widest whitespace-pre-line leading-relaxed" style="font-size: 0.9rem; padding-top: 0.15rem">{{ smallTextB }}</h4>
                 </div>
 
-                <img
-                  src="logo-maroon.svg"
-                  class="logo flex-none ml-8"
-                  :class="smallText.length !== 0 ? 'mt-2' : ''"
-                  width="156"
-                />
+                <img src="logo-maroon.svg" class="logo flex-none ml-8" :class="smallText.length !== 0 ? 'mt-2' : ''" width="156" />
               </div>
             </div>
           </div>
         </div>
 
         <div>
-          <h2
-            class="
-              mx-4
-              mt-10
-              text-black
-              opacity-40
-              uppercase
-              tracking-widest
-              text-sm
-            "
-          >
-            Footer Graphic - Last Page
-          </h2>
+          <h2 class="mx-4 mt-10 text-black opacity-40 uppercase tracking-widest text-sm">Footer Graphic - Last Page</h2>
           <div class="m-4 bg-white">
             <div id="footer" class="bg-transparent flex">
-              <div
-                class="flex justify-between items-end"
-                style="margin: 85px 90px 59px; width: 100%"
-              >
+              <div class="flex justify-between items-end" style="margin: 85px 90px 59px; width: 100%">
                 <div class="text flex-1">
-                  <h4
-                    v-if="smallTextB"
-                    class="
-                      meta
-                      text-ethos
-                      uppercase
-                      tracking-widest
-                      whitespace-pre-line
-                      leading-relaxed
-                    "
-                    style="font-size: 1.1rem; padding: 0 1rem 0 0"
-                  >
-                    {{division}}
-                  </h4>
+                  <h4 v-if="smallTextB" class="meta text-ethos uppercase tracking-widest whitespace-pre-line leading-relaxed" style="font-size: 1.1rem; padding: 0 1rem 0 0">{{division}}</h4>
                 </div>
 
-                <h2
-                  class="
-                    text-maroon
-                    uppercase
-                    condensed
-                    font-normal
-                    whitespace-nowrap
-                    text-xs
-                    wordmark
-                  "
-                  style="font-size: 2.5rem; letter-spacing: 0.045em"
-                >
-                  Oklahoma Christian University
-                </h2>
+                <h2 class="text-maroon uppercase condensed font-normal whitespace-nowrap text-xs wordmark" style="font-size: 2.5rem; letter-spacing: 0.045em">Oklahoma Christian University</h2>
               </div>
             </div>
           </div>
@@ -253,8 +74,7 @@
           return {
             smallText: "Bachelor of Arts In",
             largeText: "Preaching Ministry",
-            smallTextB:
-              "74-75 hours + 6 hours Biblical Language \nNo minor required",
+            smallTextB: "74-75 hours + 6 hours Biblical Language \nNo minor required",
             division: "Division Name Here",
           };
         },
