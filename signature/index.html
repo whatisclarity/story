@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✍️ Email Signature</title>
+    <!-- Alpine Plugins -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
+    <!-- Alpine Core -->
+    <script defer src="https://unpkg.com/alpinejs"></script>
+    <link
+        href="https://use.typekit.net/nyp5qmz.css"
+        rel="stylesheet"
+        crossorigin="anonymous"
+    />
+    <style>
+        :root {
+            --maroon: #801328;
+            --dark-maroon: #48111c;
+            --silver: #d5dfe7;
+            --cream: #f4ecd0;
+            --teal: #27575a;
+            --royal: #118acb;
+            --redOrange: #f04e3e;
+            --sky: #bde3dc;
+            --marigold: #f9c634;
+            --storm: #708e9a;
+            --salmon: #f68d76;
+            --navy: #004761;
+            --ethos: #5ec4b6;
+
+            color: var(--maroon);
+            font-family: sofia-pro;
+            font-size: 17px;
+            font-weight: 600;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #fff;
+            color: #811429;
+            padding: 100px;
+        }
+        a {color: var(--royal);}
+        main {
+            display: flex;
+        }
+        .col-l {
+            width: 30%;
+            background: var(--maroon);
+            color: #fff;
+            padding: 30px;
+        }
+            form label {
+                display: flex;
+                flex-direction: column;
+            }
+            form input {
+                margin: .2rem 0 .8rem;
+                padding: .2rem;
+            }
+        .col-r {
+            width: 70%;
+            background: var(--salmon);
+        }
+            .preview {
+                background: #ffffff;
+                border-radius: 10px;
+                margin: 30px;
+                padding: 30px;
+            }
+            .instructions {
+                background: var(--sky);
+                padding: 30px;
+            }
+        .heading {
+            font-size: 30px;
+        }
+        .subheading {
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    
+    <main
+        x-data="{
+            name: '',
+            title: '',
+            department: '',
+            phone: ''
+        }"
+    >
+
+        <!-- col-l -->
+        <div class="col-l">
+            <h3>Step 1</h3>
+            <p style="margin-bottom:30px;">Enter your information</p>
+            <form>
+                <label>
+                    Name
+                    <input type="text" x-model="name" placeholder="First Last">
+                </label>
+                <label>
+                    Job Title
+                    <input type="text" x-model="title" placeholder="Job Title">
+                </label>
+                <label>
+                    Department
+                    <input type="text" x-model="department" placeholder="Department">
+                </label>
+                <label>
+                    Phone Number
+                    <input type="text" x-model="phone" x-mask="999.999.9999" placeholder="405.425.0000">
+                </label>
+            </form>
+        </div>
+        <!-- /col-l -->
+
+        <!-- col-r -->
+        <div class="col-r">
+
+            <div style="padding:30px 30px 0;">
+                <h3>Step 2</h3>
+                <p>Make sure it looks great!</p>
+            </div>
+
+            <div class="preview">
+
+                <div style="background: #f4f4f4; margin: -30px -30px 30px; padding: 5px 15px 15px; border-radius: 10px 10px 0 0;">
+                    <span style="color: #f04e3e; font-size: 30px; line-height:1;">•</span>
+                    <span style="color: #f9c634; font-size: 30px; line-height:1;">•</span>
+                    <span style="color: #93e42a; font-size: 30px; line-height:1;">•</span>
+                    <div style="display: flex; font-size: .8rem; font-weight: normal;">
+                        From: you@oc.edu<br>
+                        To: friend@email.com
+                        <a id="copyBtn" href="javascript:void(0)" onclick="copy()" style="background: var(--royal);color: #fff;padding: 15px;text-transform: uppercase;letter-spacing: .4ch;text-decoration: none;line-height: 1;margin-left: auto;font-weight: 600;margin-top: -23px;display: flex;justify-content: center;align-items: center;">
+                          Copy to clipboard
+                        </a>
+                    </div>
+                </div>
+
+
+                <div style="font-weight: normal;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+
+                <div id="signature">
+                    <table border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; color: rgb(128, 19, 40); margin-top: 50px;">
+                        <tbody>
+                            <tr>
+                                <td width="88px;" valign="middle" style="border-collapse: collapse; border-right: 2px solid rgb(128, 19, 40); width: 88px; vertical-align: middle; padding: 9px 16px 9px 0px;">
+                                    <img src="https://ddtjogezxr16i.cloudfront.net/images/email/oc-logo-email.png" alt="Oklahoma Christian University" width="88px" height="59px" style="display: block; width: 88px; height: 59px;">
+                                </td>
+                                <td style="border-collapse: collapse; font-size: 12px; line-height: 1.4; font-family: arial, sans-serif; font-weight: normal; padding-left: 14px; padding-top: 2px;">
+                                    <div x-text="name" style="font-weight: bold;"></div>
+                                    <div>Oklahoma Christian University</div>
+                                    <div>
+                                        <span x-text="title"></span>
+                                        <template x-if="title && department"><span>/</span></template>
+                                        <span x-text="department"></span></div>
+                                    <div>
+                                        <span x-text="phone" style="color: rgb(128, 19, 40) !important; text-decoration: none !important;"></span>
+                                        <template x-if="phone"><span>|</span></template>
+                                        <a href="https://www.oc.edu" target="_blank" style="color: rgb(128, 19, 40) !important; text-decoration: none !important;">oc.edu</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="instructions">
+                <h3>Step 3</h3>
+                <p style="margin-bottom:30px;">Add your signature to Gmail</p>
+                
+                <ul style="list-style-position: inside;font-size: 0.9rem;font-weight: normal;">
+                    <li>Enter your info and preview your email signature.</li><li>
+                    Click the
+                    <a href="javascript:void(0)" onclick="copy()">Copy to clipboard</a>
+                    button.
+                  </li><li>
+                    Open your
+                    <a href="https://mail.google.com/mail/u/0/#settings/general" target="_blank" class="text-royal hover:text-redOrange transition-all font-bold">Gmail settings</a>.
+                  </li><li>
+                    Paste your signature <b>(Ctrl+V or Command+V)</b> into the
+                    <b>"Signature"</b> section.
+                  </li><li>At the bottom of the page, click <b>Save Changes.</b></li>
+                </ul>
+            </div>
+
+        </div>
+        <!-- /col-r -->
+
+
+    </main>
+
+<script>
+    function toggleCopied() {
+        const btn = document.querySelector('#copyBtn');
+        btn.style.background = '#5ec4b6';
+        btn.innerText = '✓ copied';
+        setTimeout(() => {
+            btn.style.background = '#118acb';
+            btn.innerText = 'Copy to clipboard';
+        }, 5000);
+    }
+    function copy() {
+      var str = document.getElementById('signature');
+      // Clear any current selection
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      // Select & copy
+      const range = document.createRange();
+      range.selectNodeContents(str);
+      selection.addRange(range);
+      document.execCommand('copy');
+      // Remove the selections
+      window.getSelection().removeAllRanges();
+      this.toggleCopied();
+    }
+</script>
+
+</body>
+</html>
