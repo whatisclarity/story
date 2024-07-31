@@ -254,7 +254,7 @@ h1 {
   background-color: var(--dark-maroon);
 }
 .scheme-8 h4 {
-  color: var(--redOrange);
+  color: #fff;
 }
 .scheme-9 {
   background-color: var(--silver);
@@ -296,7 +296,10 @@ h1 {
   background-color: var(--ethos);
 }
 .scheme-13 h4 {
-  color: var(--teal);
+  color: white;
+}
+.scheme-13 h1 {
+  color: var(--maroon);
 }
 .scheme-14 h1 {
   color: white;
