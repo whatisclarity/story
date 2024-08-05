@@ -161,10 +161,16 @@ h1 {
 .layout-2 .img {
   height: 33.33%;
 }
+.layout-2 .tip-img {
+  top: 20%;
+}
 
 /* layout-3: 1/2 image */
 .layout-3 .img {
   height: 50%;
+}
+.layout-3 .tip-img {
+  top: 25%;
 }
 /* .layout-2 h1,
 .layout-3 h1 {font-size: 3.25rem;} */
@@ -176,6 +182,9 @@ h1 {
 .layout-4 .text {
   height: auto;
   flex-grow: 0;
+}
+.layout-4 .tip-img {
+  top: 35%;
 }
 
 /* layout-5 - text over image */
@@ -199,13 +208,21 @@ h1 {
 .reverse .text {
   padding-top: 8rem;
 }
-
+.layout-2.reverse .tip-img {
+  top: 75%;
+}
+.layout-3.reverse .tip-img {
+  top: 70%;
+}
 .layout-4.reverse .text {
   padding-top: 4rem;
 }
 .layout-4.reverse .logo {
   top: auto;
   bottom: 1rem;
+}
+.layout-4.reverse .tip-img {
+  top: 60%;
 }
 
 .scheme-1 {
