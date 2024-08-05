@@ -157,7 +157,8 @@ h1 {
   font-size: 3.75rem;
 }
 .layout-1 .tip-img {
-  display: none;
+  opacity: 0;
+  top: 50%;
 }
 
 /* layout-2: 1/3 image */
