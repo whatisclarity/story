@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Instagram Story Maker</title>
     <link
-      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      zhref="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@^2/dist/tailwind.min.css"
       rel="stylesheet"
       crossorigin="anonymous"
     />
@@ -15,9 +16,10 @@
       rel="stylesheet"
       crossorigin="anonymous"
     />
-    <link href="app.css?v=1" rel="stylesheet" />
+    <link href="app.css?v=1.1" rel="stylesheet" />
     <script
-      src="https://unpkg.com/vue@3.1.1/dist/vue.global.prod.js"
+      zsrc="https://unpkg.com/vue@3.1.1/dist/vue.global.prod.js"
+      src="https://cdn.jsdelivr.net/npm/vue@3.1.1/dist/vue.global.prod.js"
       crossorigin="anonymous"
     ></script>
     <script
@@ -32,59 +34,29 @@
       <div id="tools" class="bg-gray p-8 pb-36 w-1/4">
         <div class="sticky top-8">
           <label
-            for="textA"
-            class="uppercase text-sm text-white tracking-widest mb-1 block"
-            >Text 1</label
-          >
-          <textarea
-            id="textA"
-            class="block w-full rounded-sm p-3 mb-4"
-            maxlength="100"
-            v-model="textA"
-            rows="2"
-          ></textarea>
-
-          <label
-            v-if="(layout !== 'layout-2') && (layout !== 'layout-7')"
-            for="textB"
-            class="uppercase text-sm text-white tracking-widest mb-1 block"
-            >Text 2</label
-          >
-          <textarea
-            v-if="(layout !== 'layout-2') && (layout !== 'layout-7')"
-            id="textB"
-            class="block w-full rounded-sm p-3 mb-4"
-            maxlength="100"
-            v-model="textB"
-            rows="2"
-          ></textarea>
-
-          <label
-            v-if="(layout !== 'layout-2') && (layout !== 'layout-7')"
-            for="textC"
-            class="uppercase text-sm text-white tracking-widest mb-1 block"
-            >Text 3</label
-          >
-          <textarea
-            v-if="(layout !== 'layout-2') && (layout !== 'layout-7')"
-            id="textC"
-            class="block w-full rounded-sm p-3 mb-4"
-            maxlength="100"
-            v-model="textC"
-            rows="2"
-          ></textarea>
-
-          <label
             for="textD"
             class="uppercase text-sm text-white tracking-widest mb-1 block"
-            >Book / Chapter / Verse</label
+            >Book Chapter:Verse</label
           >
           <textarea
             id="textD"
             class="block w-full rounded-sm p-3 mb-8"
-            maxlength="100"
+            maxlength="50"
             v-model="textD"
             rows="1"
+          ></textarea>
+
+          <label
+            for="textA"
+            class="uppercase text-sm text-white tracking-widest mb-1 block"
+            >Verse</label
+          >
+          <textarea
+            id="textA"
+            class="block w-full rounded-sm p-3 mb-4"
+            maxlength="300"
+            v-model="textA"
+            rows="3"
           ></textarea>
 
           <!-- color schemes -->
@@ -96,425 +68,59 @@
             <a
               href="#"
               @click.prevent="scheme = 'scheme-1'"
-              class="bg-maroon w-10 h-10 rounded-full border-4 border-white m-1"
+              class="bg-royal w-10 h-10 rounded-full border-4 border-white m-1"
               :class="scheme === 'scheme-1' ? 'active' : ''"
             ></a>
             <a
               href="#"
               @click.prevent="scheme = 'scheme-2'"
-              class="bg-teal w-10 h-10 rounded-full border-4 border-white m-1"
+              class="bg-cream w-10 h-10 rounded-full border-4 border-white m-1"
               :class="scheme === 'scheme-2' ? 'active' : ''"
             ></a>
             <a
               href="#"
               @click.prevent="scheme = 'scheme-3'"
-              class="bg-royal w-10 h-10 rounded-full border-4 border-white m-1"
+              class="bg-storm w-10 h-10 rounded-full border-4 border-white m-1"
               :class="scheme === 'scheme-3' ? 'active' : ''"
             ></a>
             <a
               href="#"
               @click.prevent="scheme = 'scheme-4'"
-              class="
-                bg-redOrange
-                w-10
-                h-10
-                rounded-full
-                border-4 border-white
-                m-1
-              "
+              class="bg-ethos w-10 h-10 rounded-full border-4 border-white m-1"
               :class="scheme === 'scheme-4' ? 'active' : ''"
             ></a>
             <a
               href="#"
               @click.prevent="scheme = 'scheme-5'"
-              class="bg-sky w-10 h-10 rounded-full border-4 border-white m-1"
+              class="bg-marigold w-10 h-10 rounded-full border-4 border-white m-1"
               :class="scheme === 'scheme-5' ? 'active' : ''"
             ></a>
             <a
               href="#"
               @click.prevent="scheme = 'scheme-6'"
-              class="
-                bg-marigold
-                w-10
-                h-10
-                rounded-full
-                border-4 border-white
-                m-1
-              "
+              class="bg-silver w-10 h-10 rounded-full border-4 border-white m-1"
               :class="scheme === 'scheme-6' ? 'active' : ''"
             ></a>
             <a
               href="#"
               @click.prevent="scheme = 'scheme-7'"
-              class="bg-storm w-10 h-10 rounded-full border-4 border-white m-1"
+              class="bg-dark-maroon w-10 h-10 rounded-full border-4 border-white m-1"
               :class="scheme === 'scheme-7' ? 'active' : ''"
             ></a>
             <a
               href="#"
               @click.prevent="scheme = 'scheme-8'"
-              class="
-                bg-dark-maroon
-                w-10
-                h-10
-                rounded-full
-                border-4 border-white
-                m-1
-              "
+              class="bg-teal w-10 h-10 rounded-full border-4 border-white m-1"
               :class="scheme === 'scheme-8' ? 'active' : ''"
             ></a>
             <a
               href="#"
               @click.prevent="scheme = 'scheme-9'"
-              class="bg-silver w-10 h-10 rounded-full border-4 border-white m-1"
+              class="bg-maroon w-10 h-10 rounded-full border-4 border-white m-1"
               :class="scheme === 'scheme-9' ? 'active' : ''"
             ></a>
-            <a
-              href="#"
-              @click.prevent="scheme = 'scheme-10'"
-              class="bg-cream w-10 h-10 rounded-full border-4 border-white m-1"
-              :class="scheme === 'scheme-10' ? 'active' : ''"
-            ></a>
-            <a
-              href="#"
-              @click.prevent="scheme = 'scheme-11'"
-              class="bg-salmon w-10 h-10 rounded-full border-4 border-white m-1"
-              :class="scheme === 'scheme-11' ? 'active' : ''"
-            ></a>
-            <a
-              href="#"
-              @click.prevent="scheme = 'scheme-12'"
-              class="bg-navy w-10 h-10 rounded-full border-4 border-white m-1"
-              :class="scheme === 'scheme-12' ? 'active' : ''"
-            ></a>
-            <a
-              href="#"
-              @click.prevent="scheme = 'scheme-13'"
-              class="bg-ethos w-10 h-10 rounded-full border-4 border-white m-1"
-              :class="scheme === 'scheme-13' ? 'active' : ''"
-            ></a>
-            <a
-              href="#"
-              @click.prevent="scheme = 'scheme-14'"
-              class="bg-white w-10 h-10 rounded-full border-4 border-white m-1"
-              :class="scheme === 'scheme-14' ? 'active' : ''"
-            ></a>
           </div>
-          <!-- color schemes -->
-
-          <!-- layouts -->
-          <h2 class="uppercase text-sm text-white tracking-widest mb-1">
-            Layout
-          </h2>
-          <div class="flex flex-wrap -m-1 mb-8">
-            <a href="#" @click.prevent="layout = 'layout-1'">
-              <div
-                class="
-                  thumb
-                  flex flex-col
-                  layout-1
-                  border-4 border-white
-                  rounded-md
-                  m-1
-                "
-                :class="[scheme, layout === 'layout-1' ? 'active' : '']"
-              >
-                <div
-                  class="
-                    text
-                    flex-1 flex
-                    text-white
-                    items-center
-                    justify-center
-                  "
-                >
-                  <div
-                    class="border-t border-b border-white h-2 w-2/3 opacity-50"
-                  ></div>
-                </div>
-              </div>
-            </a>
-            <a href="#" @click.prevent="layout = 'layout-2'">
-              <div
-                class="
-                  thumb
-                  flex flex-col
-                  layout-2
-                  border-4 border-white
-                  rounded-md
-                  m-1
-                "
-                :class="[scheme, layout === 'layout-2' ? 'active' : '']"
-              >
-                <div class="img bg-black bg-opacity-50">
-                  <img
-                    v-if="img"
-                    :src="img"
-                    class="object-cover w-full h-full"
-                  />
-                </div>
-                <div
-                  class="
-                    text
-                    flex-1 flex
-                    text-white
-                    items-center
-                    justify-center
-                  "
-                >
-                  <div
-                    class="border-t border-b border-white h-2 w-2/3 opacity-50"
-                  ></div>
-                </div>
-              </div>
-            </a>
-            <a href="#" @click.prevent="layout = 'layout-3'">
-              <div
-                class="
-                  thumb
-                  flex flex-col
-                  layout-3
-                  border-4 border-white
-                  rounded-md
-                  m-1
-                "
-                :class="[scheme, layout === 'layout-3' ? 'active' : '']"
-              >
-                <div class="img bg-black bg-opacity-50">
-                  <img
-                    v-if="img"
-                    :src="img"
-                    class="object-cover w-full h-full"
-                  />
-                </div>
-                <div
-                  class="
-                    text
-                    flex-1 flex
-                    text-white
-                    items-center
-                    justify-center
-                  "
-                >
-                  <div
-                    class="border-t border-b border-white h-2 w-2/3 opacity-50"
-                  ></div>
-                </div>
-              </div>
-            </a>
-            <a href="#" @click.prevent="layout = 'layout-4'">
-              <div
-                class="
-                  thumb
-                  flex flex-col
-                  layout-4
-                  border-4 border-white
-                  rounded-md
-                  m-1
-                "
-                :class="[scheme, layout === 'layout-4' ? 'active' : '']"
-              >
-                <div class="img bg-black bg-opacity-50">
-                  <img
-                    v-if="img"
-                    :src="img"
-                    class="object-cover w-full h-full"
-                  />
-                </div>
-                <div
-                  class="
-                    text
-                    flex-1 flex
-                    text-white
-                    items-center
-                    justify-center
-                  "
-                >
-                  <div
-                    class="
-                      border-t border-b border-white
-                      h-2
-                      w-2/3
-                      opacity-50
-                      my-2
-                    "
-                  ></div>
-                </div>
-              </div>
-            </a>
-            <a href="#" @click.prevent="layout = 'layout-5'">
-              <div
-                class="
-                  thumb
-                  flex flex-col
-                  layout-4
-                  flex-col-reverse
-                  border-4 border-white
-                  rounded-md
-                  m-1
-                "
-                :class="[scheme, layout === 'layout-5' ? 'active' : '']"
-              >
-                <div class="img bg-black bg-opacity-50">
-                  <img
-                    v-if="img"
-                    :src="img"
-                    class="object-cover w-full h-full"
-                  />
-                </div>
-                <div
-                  class="
-                    text
-                    flex-1 flex
-                    text-white
-                    items-center
-                    justify-center
-                  "
-                >
-                  <div
-                    class="
-                      border-t border-b border-white
-                      h-2
-                      w-2/3
-                      opacity-50
-                      my-2
-                    "
-                  ></div>
-                </div>
-              </div>
-            </a>
-            <a href="#" @click.prevent="layout = 'layout-6'">
-              <div
-                class="
-                  thumb
-                  flex flex-col
-                  layout-3
-                  flex-col-reverse
-                  border-4 border-white
-                  rounded-md
-                  m-1
-                "
-                :class="[scheme, layout === 'layout-6' ? 'active' : '']"
-              >
-                <div class="img bg-black bg-opacity-50">
-                  <img
-                    v-if="img"
-                    :src="img"
-                    class="object-cover w-full h-full"
-                  />
-                </div>
-                <div
-                  class="
-                    text
-                    flex-1 flex
-                    text-white
-                    items-center
-                    justify-center
-                  "
-                >
-                  <div
-                    class="border-t border-b border-white h-2 w-2/3 opacity-50"
-                  ></div>
-                </div>
-              </div>
-            </a>
-            <a href="#" @click.prevent="layout = 'layout-7'">
-              <div
-                class="
-                  thumb
-                  flex flex-col
-                  layout-2
-                  flex-col-reverse
-                  border-4 border-white
-                  rounded-md
-                  m-1
-                "
-                :class="[scheme, layout === 'layout-7' ? 'active' : '']"
-              >
-                <div class="img bg-black bg-opacity-50">
-                  <img
-                    v-if="img"
-                    :src="img"
-                    class="object-cover w-full h-full"
-                  />
-                </div>
-                <div
-                  class="
-                    text
-                    flex-1 flex
-                    text-white
-                    items-center
-                    justify-center
-                  "
-                >
-                  <div
-                    class="border-t border-b border-white h-2 w-2/3 opacity-50"
-                  ></div>
-                </div>
-              </div>
-            </a>
-            <a href="#" @click.prevent="layout = 'layout-8'">
-              <div
-                class="
-                  thumb
-                  flex flex-col
-                  layout-5
-                  relative
-                  border-4 border-white
-                  rounded-md
-                  m-1
-                "
-                :class="[scheme, layout === 'layout-8' ? 'active' : '']"
-              >
-                <div class="img bg-black bg-opacity-50">
-                  <img
-                    v-if="img"
-                    :src="img"
-                    class="object-cover w-full h-full"
-                  />
-                </div>
-                <div
-                  class="
-                    text
-                    flex-1 flex
-                    text-white
-                    items-center
-                    justify-center
-                  "
-                >
-                  <div
-                    class="border-t border-b border-white h-2 w-2/3 opacity-50"
-                  ></div>
-                </div>
-              </div>
-            </a>
-          </div>
-          <!-- /layouts -->
-
-          <!-- image upload -->
-          <!-- <label
-            for="imgUpload"
-            class="
-              uppercase
-              text-sm text-white
-              tracking-widest
-              mb-1
-              block
-              border-2
-              p-6
-              text-center
-              cursor-pointer
-            "
-            >&plus; Upload <span v-if="img">a different</span
-            ><span v-else>an</span> Image</label
-          >
-          <input
-            id="imgUpload"
-            type="file"
-            accept="image/*"
-            class="hidden"
-            @change="uploadImage"
-          /> -->
-          <!-- /image upload -->
+          <!-- /color schemes -->
 
           <div
             class="
@@ -541,7 +147,7 @@
                 text-center
                 cursor-pointer
               "
-              >&darr; Download it!
+              >&darr; Download
             </a>
           </div>
         </div>
@@ -599,23 +205,10 @@
             </svg>
 
             <div class="text">
-              <div class="text-a">{{ textA }}</div>
-              <div
-                v-if="layout === 'layout-2'"
-                class="text-b"
-                :style="{fontSize: (22 / textB.length) + 'rem', marginRight: '-.22em'}"
-              >
-                {{ textB }}
-              </div>
-              <div
-                v-else-if="layout === 'layout-6'"
-                v-html="textBSplit"
-                class="text-b"
-                :style="{fontSize: (20 / textB.length) + 'rem'}"
-              ></div>
-              <div v-else class="text-b">{{ textB }}</div>
-              <div v-if="layout !== 'layout-2'" class="text-c">{{ textC }}</div>
               <div class="text-d">{{ textD }}</div>
+              <div class="text-a flex">
+                <span>&ldquo;</span><span class="cap">{{ textA }}&rdquo;</span></span>
+              </div>
             </div>
           </div>
         </div>
@@ -647,23 +240,10 @@
             </svg>
 
             <div class="text">
-              <div class="text-a">{{ textA }}</div>
-              <div
-                v-if="layout === 'layout-2'"
-                class="text-b"
-                :style="{fontSize: (22 / textB.length) + 'rem', marginRight: '-.22em'}"
-              >
-                {{ textB }}
-              </div>
-              <div
-                v-else-if="layout === 'layout-6'"
-                v-html="textBSplit"
-                class="text-b"
-                :style="{fontSize: (24 / textB.length) + 'rem'}"
-              ></div>
-              <div v-else class="text-b">{{ textB }}</div>
-              <div v-if="layout !== 'layout-2'" class="text-c">{{ textC }}</div>
               <div class="text-d">{{ textD }}</div>
+              <div class="text-a flex">
+                <span>&ldquo;</span><span class="cap">{{ textA }}&rdquo;</span></span>
+              </div>
             </div>
           </div>
         </div>
@@ -671,22 +251,19 @@
         <!-- /fb canvas -->
       </div>
       <!-- / viewport -->
+    
+      <div>{{ fetchVerse }}</div>
+    
     </div>
 
     <script>
       const app = {
         data() {
           return {
-            textA:
-              "Trust in the Lord always. For the Lord, the Lord Himself, is the rock eternal.",
-            textB: "",
-            textC: "",
-            // textA: "Trust in the Lord",
-            // textB: "Always",
-            // textC: "For the Lord,\nthe Lord Himself,\nis the rock eternal.",
-            textD: "Isaiah 26:4",
+            textA: "Therefore, if anyone is in Christ, he is a new creation. The old has passed away; behold, the new has come.",
+            textD: "2 Corinthians 5:17",
             scheme: "scheme-1",
-            layout: "layout-8",
+            layout: "layout-3",
           };
         },
         methods: {
@@ -737,11 +314,57 @@
               (c) => `<span>${c}</span>\n`
             );
           },
+          fetchVerse() {
+            fetch('https://api.esv.org/v3/passage/text/?include-passage-references=false&include-verse-numbers=false&include-first-verse-numbers=false&include-footnotes=false&include-footnote-body=false&include-headings=false&include-short-copyright=false&include-selahs=false&indent-paragraphs=0&indent-poetry=false&indent-poetry-lines=0&indent-declares=0&indent-psalm-doxology=0&line-length=0&q='+this.textD , {
+              method: 'GET',
+              headers: {
+                'Authorization': 'c0d12f22d14a88a816d7c64884264c029aec30c4'
+              },
+            })
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then(data => {
+              console.log('Data received:', data);
+              console.log(data.passages[0]);
+              // this.textA = data.passages[0].replace(/(\r\n|\n|\r)/gm, "");
+              this.textA = data.passages[0].trim();
+            })
+            .catch(error => {
+              console.error('There was an error:', error);
+            });
+          },
         },
         mounted() {},
       };
 
       Vue.createApp(app).mount("#app");
     </script>
-  </body>
+
+
+<!-- <script>
+fetch('https://api.esv.org/v3/passage/text/?include-passage-references=false&include-verse-numbers=false&include-first-verse-numbers=false&include-footnotes=false&include-footnote-body=false&include-headings=false&include-short-copyright=false&include-selahs=false&indent-paragraphs=0&indent-poetry=false&indent-poetry-lines=0&indent-declares=0&indent-psalm-doxology=0&line-length=0&q=Romans+5:8', {
+  method: 'GET',
+  headers: {
+    'Authorization': 'c0d12f22d14a88a816d7c64884264c029aec30c4'
+  },
+})
+.then(response => {
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return response.json();
+})
+.then(data => {
+  console.log('Data received:', data);
+})
+.catch(error => {
+  console.error('There was an error:', error);
+});
+</script> -->
+
+</body>
 </html>
