@@ -22,9 +22,9 @@
   }
   @font-face {
     font-family: "Standard CT";
-    src: url("../fonts/standardextracond-medium-2015.02.25-webfont.woff2")
+    src: url("./fonts/standardextracond-medium-2015.02.25-webfont.woff2")
         format("woff2"),
-      url("../fonts/standardextracond-medium-2015.02.25-webfont.woff")
+      url("./fonts/standardextracond-medium-2015.02.25-webfont.woff")
         format("woff");
     font-weight: normal;
     font-style: normal;
