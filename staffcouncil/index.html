@@ -18,11 +18,14 @@
 
     <div id="tools" class="bg-gray p-8 pb-44 w-1/3 xl:w-1/4">
         <div class="sticky top-8">
-            <label for="firstName" class="uppercase text-sm text-white tracking-widest mb-3 block">First Name<span>*</span></label>
+            <label for="firstName" class="uppercase text-sm text-white tracking-widest mb-3 block">First Name</label>
             <input id="firstName" placeholder="First Name" class="block w-full rounded-sm p-3 mb-4" v-model="firstName" />
 
-            <label for="lastName" class="uppercase text-sm text-white tracking-widest mb-3 block">Last Name<span>*</span></label>
+            <label for="lastName" class="uppercase text-sm text-white tracking-widest mb-3 block">Last Name</label>
             <input id="lastName" placeholder="Last Name" class="block w-full rounded-sm p-3 mb-4" v-model="lastName" />
+
+            <label for="position" class="uppercase text-sm text-white tracking-widest mb-3 block">Position</label>
+            <input id="position" placeholder="Position" class="block w-full rounded-sm p-3 mb-4" v-model="position" />
 
             <div class="fixed bottom-0 right-0 p-8 w-1/3 xl:w-1/4 bg-gray border-t border-opacity-20 border-white">
                 <a href="#" @click.prevent="save" class="btn squared uppercase text-sm text-white tracking-widest block bg-royal squared rounded-md p-6 text-center cursor-pointer">&darr; Download it! </a>
@@ -38,7 +41,7 @@
 
                 <div class="text flex-1 flex flex-col justify-center uppercase" style="padding:24px;">
                     <h4 class="tracking-widest leading-none">
-                        {{ firstName }} {{ lastName }}
+                        {{ firstName }} {{ lastName }}<span v-if="(firstName|| lastName) && position">, </span>{{ position }}
                     </h4>
                     <h1 class="condensed whitespace-pre-line mt-1">Staff Council</h1>
                 </div>
@@ -54,15 +57,16 @@ const app = {
     data() {
         return {
             firstName: '',
-            lastName: ''
+            lastName: '',
+            position: ''
         }
     },
     methods: {
         save() {
-            if (this.firstName.length === 0 || this.lastName.length === 0) {
-                alert('Please add your name.');
-                return false;
-            }
+            // if (this.firstName.length === 0 || this.lastName.length === 0) {
+            //     alert('Please add your name.');
+            //     return false;
+            // }
             const scale = 6;
             const canvas = document.getElementById('canvas');
             domtoimage.toPng(canvas, {
