@@ -1,0 +1,105 @@
+:root {
+    --maroon: #801328;
+    --dark-maroon: #41101a;
+    --silver: #d5dfe7;
+    --cream: #f4ecd0;
+    --teal: #27575a;
+    --royal: #1173b0;
+    --redOrange: #f04e3e;
+    --sky: #bde3dc;
+    --marigold: #f9c634;
+    --storm: #708e9a;
+    --salmon: #fa8e79;
+    --navy: #004761;
+    --ethos: #5ec4b6;
+  
+    color: var(--maroon);
+    font-family: sofia-pro;
+    font-size: 17px;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @font-face {
+    font-family: "Standard CT";
+    src: url("../fonts/standardextracond-medium-2015.02.25-webfont.woff2")
+        format("woff2"),
+      url("../fonts/standardextracond-medium-2015.02.25-webfont.woff")
+        format("woff");
+    font-weight: normal;
+    font-style: normal;
+  }
+  .condensed {
+    font-family: "Standard CT";
+    font-weight: 100;
+    line-height: 0.9;
+  }
+  #canvas {
+    width: 500px;
+    height: 102px;
+  }
+  .btn:hover {
+    background: var(--redOrange);
+  }
+  .squared {
+    transition: all 0.125s ease-out;
+  }
+  .squared:hover {
+    border-radius: 0;
+  }
+  /* tailwind overrides */
+  .tracking-widest {
+    letter-spacing: 0.22em;
+  }
+  .rounded-4xl {
+    border-radius: 2rem;
+  }
+  .bg-maroon {
+    background-color: var(--maroon);
+  }
+  .bg-dark-maroon {
+    background-color: var(--dark-maroon);
+  }
+  .bg-silver {
+    background-color: var(--silver);
+  }
+  .bg-cream {
+    background-color: var(--cream);
+  }
+  .bg-teal {
+    background-color: var(--teal);
+  }
+  .bg-royal {
+    background-color: var(--royal);
+  }
+  .bg-redOrange {
+    background-color: var(--redOrange);
+  }
+  .bg-sky {
+    background-color: var(--sky);
+  }
+  .bg-marigold {
+    background-color: var(--marigold);
+  }
+  .bg-storm {
+    background-color: var(--storm);
+  }
+  .bg-salmon {
+    background-color: var(--salmon);
+  }
+  .bg-navy {
+    background-color: var(--navy);
+  }
+  .bg-ethos {
+    background-color: var(--ethos);
+  }
+  .bg-gray {
+    background-color: #333;
+  }
+  h1 {
+    font-size: 3.87rem;
+  }
+  h4 {
+    font-size: .8rem;
+    margin-left: 2px;
+  }
