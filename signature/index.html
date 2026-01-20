@@ -93,7 +93,8 @@
             name: '',
             title: '',
             department: '',
-            phone: ''
+            phone: '',
+            email: ''
         }"
     >
 
@@ -117,6 +118,10 @@
                 <label>
                     Phone Number
                     <input type="text" x-model="phone" x-mask="999.999.9999" placeholder="405.425.0000">
+                </label>
+                <label>
+                    Email Address
+                    <input type="email" x-model="email" placeholder="your.name@oc.edu">
                 </label>
             </form>
         </div>
@@ -166,7 +171,8 @@
                                     <div>
                                         <span x-text="phone" style="color: rgb(128, 19, 40) !important; text-decoration: none !important;"></span>
                                         <template x-if="phone"><span>|</span></template>
-                                        <a href="https://www.oc.edu" target="_blank" style="color: rgb(128, 19, 40) !important; text-decoration: none !important;">oc.edu</a>
+                                        <template x-if="email"><a x-text="email" x-bind:href="'mailto:' + email" target="_blank" style="color: rgb(128, 19, 40) !important; text-decoration: none !important;"></a></template>
+                                        <template x-if="!email"><a href="https://www.oc.edu" target="_blank" style="color: rgb(128, 19, 40) !important; text-decoration: none !important;">oc.edu</a></template>
                                     </div>
                                 </td>
                             </tr>
