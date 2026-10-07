@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Printable Parking Card Generator</title>
+
+  <!-- Google Font: Bebas Neue -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- jsPDF for direct PDF creation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
+    /* CSS Print rules for aspect-ratio preserved landscape printing */
+    @media print {
+      @page {
+        size: letter landscape;
+        margin: 0;
+      }
+      html, body {
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        background: #ffffff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      /* Hide all UI layout elements from print flow */
+      body * {
+        visibility: hidden !important;
+      }
+      /* Display dedicated print image with aspect ratio preservation */
+      #print-image {
+        visibility: visible !important;
+        display: block !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+        object-fit: contain !important;
+        margin: auto !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+    }
+
+    #preview-canvas {
+      /* Screen display aspect ratio sizing */
+      width: 100%;
+      max-width: 880px;
+      height: auto;
+      background-color: #ffffff;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      border-radius: 2px;
+      display: block;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-800 flex flex-col antialiased">
+
+  <!-- Header -->
+  <header class="no-print bg-white border-b border-slate-200 px-6 py-4 shadow-sm">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <div>
+        <h1 class="text-xl font-bold text-slate-900">Printable Parking Card Generator</h1>
+        <p class="text-xs text-slate-500">Print at 100%, landscape orientation. Crop on trim lines.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 max-w-6xl w-full mx-auto p-4 md:p-8 flex flex-col md:flex-row gap-8 items-start justify-center">
+
+    <!-- Left Controls Panel -->
+    <div class="no-print w-full md:w-80 bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col gap-6">
+      
+      <div class="space-y-4">
+        <h2 class="text-base font-semibold text-slate-900 border-b border-slate-100 pb-2">Name Details</h2>
+        
+        <div>
+          <label for="input-firstname" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
+            First Name
+          </label>
+          <input
+            id="input-firstname"
+            type="text"
+            value="First"
+            placeholder="First Name"
+            class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
+            oninput="renderCanvas()"
+          />
+        </div>
+
+        <div>
+          <label for="input-lastname" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
+            Last Name
+          </label>
+          <input
+            id="input-lastname"
+            type="text"
+            value="Last"
+            placeholder="Last Name"
+            class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
+            oninput="renderCanvas()"
+          />
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="space-y-3 pt-2 border-t border-slate-100">
+        <button
+          onclick="downloadPDF()"
+          class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-4 rounded-lg shadow transition flex items-center justify-center gap-2 text-sm"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+          </svg>
+          Download PDF
+        </button>
+
+        <button
+          onclick="triggerPrint()"
+          class="w-full bg-slate-800 hover:bg-slate-900 text-white font-medium py-2.5 px-4 rounded-lg shadow transition flex items-center justify-center gap-2 text-sm"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+          </svg>
+          Print / System Dialog
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Right Preview Area -->
+    <div class="print-container flex-1 flex flex-col items-center justify-center w-full">
+      <div class="no-print text-xs text-slate-400 mb-2 font-mono">
+        Live Sheet Preview (11" × 8.5" Landscape)
+      </div>
+
+      <!-- High Resolution 300 DPI Rendering Canvas -->
+      <canvas id="preview-canvas" width="3300" height="2550"></canvas>
+    </div>
+
+  </main>
+
+  <!-- Dedicated Print Image element (Hidden during standard web viewing) -->
+  <img id="print-image" class="hidden" alt="Print Render" />
+
+  <script>
+    // Exact 300 DPI Canvas Coordinates
+    const CANVAS_WIDTH = 3300;   // 11 inches @ 300 DPI
+    const CANVAS_HEIGHT = 2550;  // 8.5 inches @ 300 DPI
+    
+    const LIVE_WIDTH = 2550;     // 8.5 inches @ 300 DPI
+    const LIVE_HEIGHT = 1800;    // 6.0 inches @ 300 DPI
+
+    const MARGIN_X = (CANVAS_WIDTH - LIVE_WIDTH) / 2;   // 375px (1.25")
+    const MARGIN_Y = (CANVAS_HEIGHT - LIVE_HEIGHT) / 2; // 375px (1.25")
+
+    const CENTER_X = CANVAS_WIDTH / 2;  // 1650px
+    const CENTER_Y = CANVAS_HEIGHT / 2; // 1275px
+
+    function renderCanvas() {
+      const canvas = document.getElementById('preview-canvas');
+      const ctx = canvas.getContext('2d');
+
+      const firstName = (document.getElementById('input-firstname').value || '').trim();
+      const lastName = (document.getElementById('input-lastname').value || '').trim();
+
+      // 1. Clear background
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+      // 2. Draw solid perimeter trim rectangle around 8.5" x 6" live area
+      ctx.strokeStyle = '#000000';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(MARGIN_X, MARGIN_Y, LIVE_WIDTH, LIVE_HEIGHT);
+
+      // 3. Draw corner crop tick marks extending outward by 0.5" (150px)
+      const tickLen = 150;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      // Top-Left Ticks
+      ctx.moveTo(MARGIN_X - tickLen, MARGIN_Y); ctx.lineTo(MARGIN_X, MARGIN_Y);
+      ctx.moveTo(MARGIN_X, MARGIN_Y - tickLen); ctx.lineTo(MARGIN_X, MARGIN_Y);
+      // Top-Right Ticks
+      ctx.moveTo(MARGIN_X + LIVE_WIDTH, MARGIN_Y); ctx.lineTo(MARGIN_X + LIVE_WIDTH + tickLen, MARGIN_Y);
+      ctx.moveTo(MARGIN_X + LIVE_WIDTH, MARGIN_Y - tickLen); ctx.lineTo(MARGIN_X + LIVE_WIDTH, MARGIN_Y);
+      // Bottom-Left Ticks
+      ctx.moveTo(MARGIN_X - tickLen, MARGIN_Y + LIVE_HEIGHT); ctx.lineTo(MARGIN_X, MARGIN_Y + LIVE_HEIGHT);
+      ctx.moveTo(MARGIN_X, MARGIN_Y + LIVE_HEIGHT); ctx.lineTo(MARGIN_X, MARGIN_Y + LIVE_HEIGHT + tickLen);
+      // Bottom-Right Ticks
+      ctx.moveTo(MARGIN_X + LIVE_WIDTH, MARGIN_Y + LIVE_HEIGHT); ctx.lineTo(MARGIN_X + LIVE_WIDTH + tickLen, MARGIN_Y + LIVE_HEIGHT);
+      ctx.moveTo(MARGIN_X + LIVE_WIDTH, MARGIN_Y + LIVE_HEIGHT); ctx.lineTo(MARGIN_X + LIVE_WIDTH, MARGIN_Y + LIVE_HEIGHT + tickLen);
+      ctx.stroke();
+
+      if (!firstName && !lastName) return;
+
+      // Safe internal bounds for text fitting (with 0.4" internal padding)
+      const maxAllowedWidth = LIVE_WIDTH - 240;  
+      const maxAllowedHeight = LIVE_HEIGHT - 240; 
+
+      // 4. Find maximum font size using binary search
+      let low = 20;
+      let high = 800;
+      let bestSize = 20;
+
+      while (low <= high) {
+        const mid = Math.floor((low + high) / 2);
+        ctx.font = `${mid}px 'Bebas Neue', sans-serif`;
+
+        let m1 = firstName ? ctx.measureText(firstName) : { width: 0, actualBoundingBoxAscent: 0, actualBoundingBoxDescent: 0 };
+        let m2 = lastName ? ctx.measureText(lastName) : { width: 0, actualBoundingBoxAscent: 0, actualBoundingBoxDescent: 0 };
+
+        let w1 = m1.width;
+        let h1 = m1.actualBoundingBoxAscent + m1.actualBoundingBoxDescent;
+
+        let w2 = m2.width;
+        let h2 = m2.actualBoundingBoxAscent + m2.actualBoundingBoxDescent;
+
+        let maxW = Math.max(w1, w2);
+        let gap = (firstName && lastName) ? mid * 0.08 : 0;
+        let totalH = h1 + h2 + gap;
+
+        if (maxW <= maxAllowedWidth && totalH <= maxAllowedHeight) {
+          bestSize = mid;
+          low = mid + 1;
+        } else {
+          high = mid - 1;
+        }
+      }
+
+      // 5. Calculate exact baseline offsets using visual cap-height bounding boxes
+      ctx.font = `${bestSize}px 'Bebas Neue', sans-serif`;
+      ctx.fillStyle = '#811429';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'alphabetic';
+
+      let m1 = firstName ? ctx.measureText(firstName) : null;
+      let m2 = lastName ? ctx.measureText(lastName) : null;
+
+      let ascent1 = m1 ? m1.actualBoundingBoxAscent : 0;
+      let descent1 = m1 ? m1.actualBoundingBoxDescent : 0;
+      let h1 = ascent1 + descent1;
+
+      let ascent2 = m2 ? m2.actualBoundingBoxAscent : 0;
+      let descent2 = m2 ? m2.actualBoundingBoxDescent : 0;
+      let h2 = ascent2 + descent2;
+
+      let gap = (firstName && lastName) ? bestSize * 0.08 : 0;
+      let totalVisualHeight = h1 + h2 + gap;
+
+      // Top-most pixel coordinate of the upper name
+      let visualTopY = CENTER_Y - (totalVisualHeight / 2);
+
+      if (firstName && lastName) {
+        // Two stacked lines
+        let baseline1 = visualTopY + ascent1;
+        let visualTopY2 = baseline1 + descent1 + gap;
+        let baseline2 = visualTopY2 + ascent2;
+
+        ctx.fillText(firstName, CENTER_X, baseline1);
+        ctx.fillText(lastName, CENTER_X, baseline2);
+      } else if (firstName) {
+        // Single line (First Name only)
+        let baseline1 = visualTopY + ascent1;
+        ctx.fillText(firstName, CENTER_X, baseline1);
+      } else if (lastName) {
+        // Single line (Last Name only)
+        let baseline2 = visualTopY + ascent2;
+        ctx.fillText(lastName, CENTER_X, baseline2);
+      }
+
+      // Keep print image tag synced with active canvas state
+      const printImg = document.getElementById('print-image');
+      if (printImg) {
+        printImg.src = canvas.toDataURL('image/png', 1.0);
+      }
+    }
+
+    // Direct Print Trigger
+    function triggerPrint() {
+      renderCanvas();
+      window.print();
+    }
+
+    // Sync print image before browser native print triggers (e.g. Cmd+P)
+    window.addEventListener('beforeprint', () => {
+      renderCanvas();
+    });
+
+    // Direct PDF Download
+    function downloadPDF() {
+      const { jsPDF } = window.jspdf;
+      const canvas = document.getElementById('preview-canvas');
+
+      const imgData = canvas.toDataURL('image/png', 1.0);
+      
+      const pdf = new jsPDF({
+        orientation: 'landscape',
+        unit: 'in',
+        format: [11, 8.5]
+      });
+
+      pdf.addImage(imgData, 'PNG', 0, 0, 11, 8.5);
+
+      const firstName = document.getElementById('input-firstname').value.trim() || 'Name';
+      const lastName = document.getElementById('input-lastname').value.trim() || 'Card';
+      pdf.save(`${firstName}_${lastName}_11x8.5.pdf`);
+    }
+
+    // Ensure font is fully loaded before initial render
+    document.fonts.ready.then(() => {
+      renderCanvas();
+    });
+
+    window.addEventListener('DOMContentLoaded', renderCanvas);
+  </script>
+</body>
+</html>
